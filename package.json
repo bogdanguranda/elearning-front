@@ -18,7 +18,6 @@
   "homepage": "https://github.com/bogdanguranda/elearning-front#readme",
   "dependencies": {
     "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-cache": "^0.2.10",
@@ -35,6 +34,8 @@
     "gulp-uglify": "^1.2.0",
     "http": "0.0.0",
     "jade": "^1.11.0",
+    "jquery": "~2.1.4",
+    "nock": "^2.17.0",
     "st": "^0.5.5"
   }
 }

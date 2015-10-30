@@ -29,7 +29,7 @@ gulp.task('styles', function() {
             'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
             'app/styles/*.scss',
             'app/components/**/*.scss',
-            'app/common/**/*.scss',
+
             ])
         .pipe(sass({ style: 'expanded' }))
         .pipe(rename({suffix: '.min'}))
@@ -101,12 +101,11 @@ gulp.task('default',['clean'], function(){
 gulp.task('watch', function() {
 
 // Watch .scss files
-    gulp.watch('app/common/**/*.scss', ['styles', 'compile_templates']);
     gulp.watch('app/components/**/*.scss', ['styles', 'compile_templates']);
     gulp.watch('app/components/**/*.js', ['scripts', 'compile_templates']);
     gulp.watch('app/dependencies/*.js',['scripts']);
-	gulp.watch(['app/_include/scss/*.scss','app/styles/*.scss'],['styles']);
-	gulp.watch('app/components/**/*.jade',['styles', 'scripts', 'compile_templates']);
+    gulp.watch(['app/_include/scss/*.scss','app/styles/*.scss'],['styles']);
+    gulp.watch('app/components/**/*.jade',['styles', 'scripts', 'compile_templates']);
     gulp.watch('app/pages/*.jade',['compile_templates']);
     gulp.watch('app/responses/*',['responses']);
     gulp.watch('app/index.html', ['index']);
@@ -124,4 +123,3 @@ gulp.task('server', function(done) {
         st({ path: 'public', index: 'index.html', cache: false })
     ).listen(8088, done);
 });
-
