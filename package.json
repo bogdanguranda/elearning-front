@@ -1,0 +1,40 @@
+{
+  "name": "elearning-front",
+  "version": "1.0.0",
+  "description": "Elearning web app frontend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bogdanguranda/elearning-front.git"
+  },
+  "author": "sergiu_chiorean@yahoo.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bogdanguranda/elearning-front/issues"
+  },
+  "homepage": "https://github.com/bogdanguranda/elearning-front#readme",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-cache": "^0.2.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-file-include": "^0.13.7",
+    "gulp-flatten": "^0.1.1",
+    "gulp-jade": "^1.0.1",
+    "gulp-jshint": "^1.11.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.2.0",
+    "http": "0.0.0",
+    "jade": "^1.11.0",
+    "st": "^0.5.5"
+  }
+}

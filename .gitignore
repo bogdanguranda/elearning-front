@@ -1,0 +1,7 @@
+.gitignore.swp
+.idea
+node_modules
+w_requirenments
+nbproject
+*~
+*.db
