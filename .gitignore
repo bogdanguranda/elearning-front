@@ -1,5 +1,6 @@
 .gitignore.swp
 .idea
+bower_components
 node_modules
 w_requirenments
 nbproject

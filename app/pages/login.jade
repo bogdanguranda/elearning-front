@@ -1,1 +1,24 @@
-p Hello
+extends ../components/common/page.jade
+
+block content
+	h1#header Hello
+	p Click me!
+	form
+		label username
+		input(id="123ABC", type="text")
+		br
+		label password
+		input(type="password")
+		br
+		button(class="btn-submit", type="submit") Submit
+block javascript
+	script(type="text/javascript").
+		$("button").on("click", function(){
+			console.log("merge1");
+		});
+		$(document).ready(function(){
+			$("p").click(function(){
+				$(this).hide();
+				console.log("merge2");
+			});
+		});

@@ -1,0 +1,16 @@
+{
+  "name": "Suseo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery.pep": "~0.6.3"
+  }
+}
