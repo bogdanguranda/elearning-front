@@ -27,7 +27,7 @@ gulp.task('styles', function() {
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
             'bower_components/nouislider/distribute/nouislider.min.css',
             'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
-            'app/styles/*.scss',
+            'app/components/**/styles/*.scss',
             'app/components/**/*.scss',
 
             ])
