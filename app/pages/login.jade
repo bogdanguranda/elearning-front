@@ -15,10 +15,13 @@ block javascript
 	script(type="text/javascript").
 		$("button").on("click", function(){
 			console.log("merge1");
+			loadAJAX();
 		});
-		$(document).ready(function(){
-			$("p").click(function(){
-				$(this).hide();
-				console.log("merge2");
+		function loadAJAX(){
+			$.ajax({
+				url: "/responses/test.json",
+				context: document.body
+			}).done( function() {
+				console.log("response");
 			});
-		});
+		}

@@ -1,0 +1,24 @@
+[
+	{
+		"id": 1,
+		"type": 1,
+		"status": "available"
+	},
+	{
+		"id": 2,
+		"type": 2,
+		"status": "selected",
+		"selected":[
+			"9A"
+		]
+	}
+]
+/*		$("button").on("click", function(){
+			console.log("merge1");
+		});
+		$(document).ready(function(){
+			$("p").click(function(){
+				$(this).hide();
+				console.log("merge2");
+			});
+		});*/
