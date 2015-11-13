@@ -1,31 +1,36 @@
 extends ../components/common/page.jade
 
 block content
-	include ../components/cursuri/cursuri.jade
+	include ../components/cursuri/cursuri_content.jade
 block javascript
 	script(type="text/javascript").
 		$(function(){
 			$(".btn-danger").on("click", function(){
-				console.log("merge1");
+				$(".btn-danger").text("Refresh Cursuri");
 				loadAJAX();
 			});
 			function loadAJAX(){
-				console.log("merge2");
-				// $.ajax({
-				// 	url: "http://localhost:8080/users"
-				// }).done( function( response) {
-				// 	console.log(response);
-				// 	console.log("merge3");
-				// });
-				$.get("http://localhost:8080/users").done(function (data) {
-					console.log("merge3");
-					console.log(data);
-					console.log("merge4");
-				});
-				$.get("/responses/test.json").done(function (data) {
-					console.log("merge5");
-					console.log(data);
-					console.log("merge6");
+				$.get("http://localhost:8080/courses").done(function (arr) {
+					var inside = "";
+					var i;
+					var row = [];
+					var th = document.getElementById("id01");
+					$(".container").empty();
+					$(".container").append(th);
+
+					for(i = 0; i < arr.length; i++) {
+						row[i] = document.createElement('div');
+						//$(row[i]).empty();
+						$(row[i]).attr("class","row row-content");
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + arr[i].title + '</div>';
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + arr[i].about + '</div>';
+						inside += '<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">' + arr[i].details + '</div>';
+						inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + arr[i].owner + '</div>';
+						$(row[i]).append(inside);
+						$("#id01").after(row[i]);
+					}
+					//console.log(row);					
+					//document.getElementById("id01").innerHTML = inside;
 				});
 			}
 		});
