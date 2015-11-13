@@ -2,3 +2,30 @@ extends ../components/common/page.jade
 
 block content
 	include ../components/cursuri/cursuri.jade
+block javascript
+	script(type="text/javascript").
+		$(function(){
+			$(".btn-danger").on("click", function(){
+				console.log("merge1");
+				loadAJAX();
+			});
+			function loadAJAX(){
+				console.log("merge2");
+				// $.ajax({
+				// 	url: "http://localhost:8080/users"
+				// }).done( function( response) {
+				// 	console.log(response);
+				// 	console.log("merge3");
+				// });
+				$.get("http://localhost:8080/users").done(function (data) {
+					console.log("merge3");
+					console.log(data);
+					console.log("merge4");
+				});
+				$.get("/responses/test.json").done(function (data) {
+					console.log("merge5");
+					console.log(data);
+					console.log("merge6");
+				});
+			}
+		});
