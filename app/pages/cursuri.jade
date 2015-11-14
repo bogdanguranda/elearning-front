@@ -5,29 +5,42 @@ block content
 block javascript
 	script(type="text/javascript").
 		$(function(){
-			$(".btn-danger").on("click", function(){
-				$(".btn-danger").text("Refresh Cursuri");
+			$("#btn-refresh").on("click", function(){
+				$("#btn-refresh").text("Refresh Cursuri");
 				loadAJAX();
 			});
+			$("#btn-adauga").on("click", function(){
+				showPopup();
+			});
+			function showPopup(){
+				//$('#modal_id').find('.modal-title').text('title');
+				//$('#modal_id').find('.modal-about').text('about');
+				//$('#modal_id').find('.modal-body').text('details');
+				$('#modal_id').modal('show');
+			}
 			function loadAJAX(){
 				$.get("http://localhost:8080/courses").done(function (arr) {
 					var inside = "";
 					var i;
 					var row = [];
 					var th = document.getElementById("id01");
+					var b1 = document.getElementById("btn-refresh");
+					var b2 = document.getElementById("btn-adauga");
 					$(".container").empty();
-					$(".container").append(th);
-
+					$(".container").append(b1,b2,th);
 					for(i = 0; i < arr.length; i++) {
-						row[i] = document.createElement('div');
+						row[i] = $("<div></div>").attr("class","row row-content");
+						//row[i] = '<div class="row row-content"></div';
+						$("#id01").after(row[i]);
 						//$(row[i]).empty();
-						$(row[i]).attr("class","row row-content");
+						//$(row[i]).attr("class","row row-content");
 						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + arr[i].title + '</div>';
 						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + arr[i].about + '</div>';
 						inside += '<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">' + arr[i].details + '</div>';
 						inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + arr[i].owner + '</div>';
 						$(row[i]).append(inside);
-						$("#id01").after(row[i]);
+						inside="";
+						//$("#id01").after(row[i]);
 					}
 					//console.log(row);					
 					//document.getElementById("id01").innerHTML = inside;
