@@ -9,7 +9,7 @@ block content
 		input(id="username", class="info", type="text", placeholder="Username", value="")
 		input(id="password", class="pw", type="password", placeholder="Password", value="")
 		input(id="repeatpassword", class="pw", type="password", placeholder="Repeat Password", value="")
-		button(class="btn-submit", type="submit") Submit
+		button(id = "submit" class="btn-submit", type="submit") Submit
 block javascript
 	script(type="text/javascript").
 		$("button").on("click", function(){
