@@ -1,8 +1,10 @@
 h1 Cursuri
 br
+button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
+button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Curs Nou
+br
 div(class="container")
-	button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
-	button(id="btn-adauga" type="button" class="btn btn-default dropdown-toggle adauga-curs") Curs Nou
+
 	div(id="id01" class="row row-header")
 		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
 			h4 Title
@@ -34,4 +36,4 @@ div(class="modal fade modal-danger", id="modal_id", tabindex="-1", role="dialog"
 					textarea(name="details" rows="4" cols="50")  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 			div(class="modal-footer")
 				button(type="button", class="btn btn-danger", data-dismiss="modal") Anuleaza
-				input(type="submit", class="btn btn-success", value="Adauga", id="submit")
+				button(id="btn-adauga", type="submit", class="btn btn-success", value="Adauga") Adauga

@@ -86,7 +86,7 @@ gulp.task('scripts', function(){
         .pipe(concat('main.js'))
         .pipe(gulp.dest('public/assets/js'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('public/assets/js'))
         .pipe(notify({ message: 'Scripts task complete' }));
 });
