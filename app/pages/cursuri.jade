@@ -13,9 +13,49 @@ block javascript
 				showPopup();
 			});
 			$("#btn-adauga").on("click", function(){
-				//$.post("http://localhost:8080/courses").done(function (data) {
-					console.log("work in progress");
-				//});
+				// $.post("http://localhost:8080/courses", function (data) {
+				// 	console.log("work in progress");
+				// });
+
+				$.postJSON = function(url, data, callback) {
+					return jQuery.ajax({
+					headers: { 
+						'Accept': 'application/json',
+						'Content-Type': 'application/json' 
+					},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'json'
+					});
+				};
+
+				$.postJSON(
+					'http://localhost:8080/courses',
+					{
+					'title': 'Donald Duck5',
+					'about': 'Duckburg5',
+					'details': 'Ceva Curs5',
+					'owner': 'boogie'
+					},
+					function(data,status){
+						console.log(status);
+						console.log(data);
+						console.log("merge si POSTU' toti!");
+					}
+				);
+
+				//- $.post("http://localhost:8080/courses",
+				//- {
+				//- 	"title": "Donald Duck",
+				//- 	"about": "Duckburg",
+				//- 	"details": "Ceva Curs",
+				//- 	"owner": "boogie"
+				//- },
+				//- function(data, status){
+				//- 	console.log("Data: " + data + "\nStatus: " + status);
+				//- });
+
 			});
 			function showPopup(){
 				//$('#modal_id').find('.modal-title').text('title');
@@ -30,8 +70,6 @@ block javascript
 					var i;
 					var row = [];
 					var th = document.getElementById("id01");
-					//var b1 = document.getElementById("btn-refresh");
-					//var b2 = document.getElementById("btn-curs-nou");
 					$(".container").empty();
 					$(".container").append(th);
 					for(i = 0; i < data.length; i++) {
