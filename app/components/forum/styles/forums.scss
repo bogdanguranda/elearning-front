@@ -1,0 +1,83 @@
+body {
+    background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
+    background-size: cover;
+    font-family: Montserrat;
+}
+
+.logo {
+    width: 213px;
+    height: 36px;
+    background: url('http://i.imgur.com/fd8Lcso.png') no-repeat;
+    margin: 30px auto;
+}
+
+.forums-block {
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    border-top: 5px solid #ff656c;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-top: 70px;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: red;
+    background: #66CCFF;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+.forumName {
+    //width: 15%;
+    float: left;
+}
+
+.forumDescription {
+    margin-left: 15%;
+    height: 100%;
+}
+
+.forumDescription p {
+    word-wrap: break-word;
+    color: white;
+    margin-top: 10px;
+}
+
+.forumName p {
+    word-wrap: break-word;
+    color: white;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.newForum {
+    width: 100px;
+    height: 50px;
+    float: right;
+    //background-color: red;
+}

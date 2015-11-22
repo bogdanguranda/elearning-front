@@ -1,0 +1,48 @@
+extends ../components/common/page.jade
+
+block content
+	//h1 Forum
+	div(class="logo")
+	div(class="forums-block")
+		button(class="newForum", type="submit") Discutie noua
+		ul
+			li
+				div(class="forumName")
+					p Name1
+				div(class="forumDescription")
+					p 
+						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
+						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
+						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
+						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
+						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
+			li 
+				div(class="forumName")
+					p Name2
+				div(class="forumDescription")
+					p Description2
+
+block javascript
+	script(type="text/javascript").
+		$("li").on("click", function(){
+			window.location = "/forum.html"
+		});
+		$(document).ready(function(){
+			alert('HI');
+			var token = "12345";
+			$.ajax({
+				url: "http://localhost:8080/threads",
+				type: "GET",
+				dataType: "json",
+				data: null,
+				headers: {'token': token},
+				success: function(data, textStatus, jqXHR) {
+					alert('Success' + data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert('Error ' + errorThrown);
+				}
+			});
+		});
+
+		
