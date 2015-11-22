@@ -5,6 +5,7 @@ block content
 block javascript
 	script(type="text/javascript").
 		$(function(){
+			var token_primit;
 			$("#btn-refresh").on("click", function(){
 				$("#btn-refresh").text("Refresh Cursuri");
 				loadAJAX();
@@ -12,12 +13,80 @@ block javascript
 			$("#btn-curs-nou").on("click", function(){
 				showPopup();
 			});
-			$("#btn-adauga").on("click", function(){
+			$("#btn-creare-user").on("click", function(){
 				$.postJSON = function(url, data, callback) {
 					return jQuery.ajax({
 					headers: { 
 						'Accept': 'application/json',
-						'Content-Type': 'application/json' 
+						'Content-Type': 'application/json',
+					},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'json',
+						'success': callback
+					});
+				};
+// username: boogie9
+// firstName : asmkac
+// lastName : bogieasa
+// email : boogie9@gmail.co
+// password : pass123
+				var username1 = 'boogie6';
+				var firstName1 = 'dude6';
+				var lastName1 = 'totdude6';
+				var email1 = 'boogie6@gmail.com';
+				var password1 = 'labughi123';
+				var dataToSend = {
+					username: username1,
+					firstName: firstName1,
+					lastName: lastName1,
+					email: email1,
+					password: password1,
+				};
+				$.postJSON(
+					'http://localhost:8080/users', 
+					dataToSend,
+					function(data, callback){
+						console.log("Data: " + data + "\nStatus: " + callback);
+				});
+				console.log('teoretic s-a creat userul');
+			});			
+			$("#btn-logare-user").on("click", function(){
+				$.postJSON = function(url, data, callback) {
+					return jQuery.ajax({
+					headers: { 
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+					},
+						'type': 'POST',
+						'url': url,
+						'data': data,
+						'dataType': 'json',
+						'success': callback
+					});
+				};
+				var username1 = 'boogie6';
+				var password1 = 'labughi123';
+				var dataToSend = {
+					username: username1,
+					password: password1
+				};
+				token_primit = $.postJSON(
+					'http://localhost:8080/authenticate', 
+					dataToSend,
+					function(data, status){
+						console.log("Data: " + data + "\nStatus: " + status);
+				});
+				console.log('Token primit: ' + token_primit);
+			});
+			$("#btn-adauga").on("click", function(){
+				$.postJSON = function(url, data, token, callback) {
+					return jQuery.ajax({
+					headers: { 
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						'token': token_primit
 					},
 						'type': 'POST',
 						'url': url,
