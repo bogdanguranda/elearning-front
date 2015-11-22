@@ -1,20 +1,4 @@
 extends ../components/common/page.jade
 
 block content
-	div(class="logo")
-	div(class="login-block")
-		h1 Login
-		input(id="username", type="text", placeholder="Username", value="")
-		input(id="password", type="password", placeholder="Password", value="")
-		button(class="btn-submit", type="submit") Connect
-block javascript
-	script(type="text/javascript").
-		$("button").on("click", function(){
-			console.log("merge1");
-		});
-		$(document).ready(function(){
-			$("p").click(function(){
-				$(this).hide();
-				console.log("merge2");
-			});
-		});
+	include ../components/login/loginadmin.jade
