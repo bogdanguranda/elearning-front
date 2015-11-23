@@ -1,38 +1,10 @@
-block content
-	div(class="logo")
-	div(class="login-block")
-		h1 Register
-		input(id="firstname", class="info", type="text", placeholder="First Name", value="")
-		input(id="lastname", class="info", type="text", placeholder="Last Name", value="")
-		input(id="email", class="info", type="text", placeholder="E-mail", value="")
-		input(id="username", class="info", type="text", placeholder="Username", value="")
-		input(id="password", class="pw", type="password", placeholder="Password", value="")
-		input(id="repeatpassword", class="pw", type="password", placeholder="Repeat Password", value="")
-		button(id = "submit" class="btn-submit", type="submit") Submit
-block javascript
-	script(src="assets/js/main.js")
-	script(type="text/javascript").
-		$(document).ready(function(){
-			$("button").on("click", function(){
-			var payload = {
-				"username": $('#username').val().toString(),
-				"firstName": $('#firstname').val().toString(),
-				"lastName": $('#lastname').val().toString(),
-				"email": $('#email').val().toString(),	
-				"password": $('#password').val().toString()
-			};
-			$.ajax({
-				url: "http://localhost:8080/users",
-				type: "POST",
-				dataType: "text",
-				headers: {'Content-Type': 'application/json'},
-				data: JSON.stringify(payload),
-				success: function (data, textStatus, jqXHR) {
-					alert('Success: ' + data);
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-				alert('Error: ' + errorThrown);
-				}
-			});
-		});
-		});
+div(class="logo")
+div(class="login-block")
+	h1 Register
+	input(id="firstname", class="info", type="text", placeholder="First Name", value="")
+	input(id="lastname", class="info", type="text", placeholder="Last Name", value="")
+	input(id="email", class="info", type="text", placeholder="E-mail", value="")
+	input(id="username", class="info", type="text", placeholder="Username", value="")
+	input(id="password", class="pw", type="password", placeholder="Password", value="")
+	input(id="repeatpassword", class="pw", type="password", placeholder="Repeat Password", value="")
+	button(id = "submit" class="btn-submit", type="submit") Submit
