@@ -106,7 +106,7 @@ block javascript
 				$.postJSON(
 					"http://localhost:8080/courses", 
 					dataToSend,
-					le_token,
+					sessionStorage.accessToken,
 					function(data, status){
 						console.log("Data: " + data + "\nStatus: " + status);
 				});
@@ -132,7 +132,7 @@ block javascript
 					});
 				};
 				
-				$.getJSON("http://localhost:8080/courses", le_token, function (data, status) {
+				$.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
 					var inside = "";
 					var i;
 					var row = [];

@@ -21,6 +21,7 @@ block javascript
 				data: JSON.stringify(payload),
 				success: function (data, textStatus, jqXHR) {
 					alert('Success: ' + data);
+					window.location.href = 'loginstudent.html';
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 				alert('Error: ' + errorThrown);

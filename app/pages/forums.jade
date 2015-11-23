@@ -28,14 +28,14 @@ block javascript
 			window.location = "/forum.html"
 		});
 		$(document).ready(function(){
-			alert('HI');
-			var token = "12345";
 			$.ajax({
-				url: "http://localhost:8080/threads",
+				url: "http://localhost:8080/messages",
 				type: "GET",
-				dataType: "json",
+				dataType: "text",
 				data: null,
-				headers: {'token': token},
+				headers: {'Content-Type': 'application/json',
+							'token': sessionStorage.accessToken
+				},
 				success: function(data, textStatus, jqXHR) {
 					alert('Success' + data);
 				},
