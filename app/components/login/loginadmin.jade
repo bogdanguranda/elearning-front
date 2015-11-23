@@ -23,6 +23,7 @@ block javascript
 				success: function (data, textStatus, jqXHR) {
 					sessionStorage.setItem("accessToken",data);
 					alert('Success: ' + sessionStorage.accessToken);
+					window.location.href='forum.html';
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					alert('Error: ' + errorThrown);
