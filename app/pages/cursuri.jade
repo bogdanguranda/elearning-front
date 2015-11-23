@@ -14,29 +14,28 @@ block javascript
 				showPopup();
 			});
 			$("#btn-creare-user").on("click", function(){
-				$.postJSON = function(url, data, callback) {
+				$.postJSON = function(url, data) {
 					return jQuery.ajax({
-					headers: { 
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
+						'headers': {
+							'Content-Type': 'application/json',
+						},
 						'type': 'POST',
 						'url': url,
 						'data': JSON.stringify(data),
-						'dataType': 'json',
-						'success': callback
+						'dataType': 'text',
+						'success': function (data, textStatus, jqXHR) {
+							alert('Success: ' + data);
+						},
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
 					});
 				};
-// username: boogie9
-// firstName : asmkac
-// lastName : bogieasa
-// email : boogie9@gmail.co
-// password : pass123
-				var username1 = 'boogie6';
-				var firstName1 = 'dude6';
-				var lastName1 = 'totdude6';
-				var email1 = 'boogie6@gmail.com';
-				var password1 = 'labughi123';
+				var username1 = 'Boogienoul';
+				var firstName1 = 'Dudeacasa';
+				var lastName1 = 'Dotduda';
+				var email1 = 'Boogienou5@gmail.com';
+				var password1 = 'Labughi123';
 				var dataToSend = {
 					username: username1,
 					firstName: firstName1,
@@ -46,11 +45,8 @@ block javascript
 				};
 				$.postJSON(
 					'http://localhost:8080/users', 
-					dataToSend,
-					function(data, callback){
-						console.log("Data: " + data + "\nStatus: " + callback);
-				});
-				console.log('teoretic s-a creat userul');
+					dataToSend
+				);
 			});			
 			$("#btn-logare-user").on("click", function(){
 				$.postJSON = function(url, data, callback) {
@@ -62,7 +58,7 @@ block javascript
 						'type': 'POST',
 						'url': url,
 						'data': data,
-						'dataType': 'json',
+						'dataType': 'text',
 						'success': callback
 					});
 				};
