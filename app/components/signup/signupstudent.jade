@@ -10,13 +10,29 @@ block content
 		input(id="repeatpassword", class="pw", type="password", placeholder="Repeat Password", value="")
 		button(id = "submit" class="btn-submit", type="submit") Submit
 block javascript
+	script(src="assets/js/main.js")
 	script(type="text/javascript").
-		$("button").on("click", function(){
-			console.log("merge1");
-		});
 		$(document).ready(function(){
-			$("p").click(function(){
-				$(this).hide();
-				console.log("merge2");
+			$("button").on("click", function(){
+			var payload = {
+				"username": $('#username').val().toString(),
+				"firstName": $('#firstname').val().toString(),
+				"lastName": $('#lastname').val().toString(),
+				"email": $('#email').val().toString(),	
+				"password": $('#password').val().toString()
+			};
+			$.ajax({
+				url: "http://localhost:8080/users",
+				type: "POST",
+				dataType: "text",
+				headers: {'Content-Type': 'application/json'},
+				data: JSON.stringify(payload),
+				success: function (data, textStatus, jqXHR) {
+					alert('Success: ' + data);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+				alert('Error: ' + errorThrown);
+				}
 			});
+		});
 		});
