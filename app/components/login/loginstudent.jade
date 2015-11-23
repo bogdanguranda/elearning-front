@@ -21,10 +21,11 @@ block javascript
 				headers: {'Content-Type': 'application/json'},
 				data: JSON.stringify(payload),
 				success: function (data, textStatus, jqXHR) {
-					alert('Success: ' + data);
+					sessionStorage.setItem("accessToken",data);
+					alert('Success: ' + sessionStorage.accessToken);
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-				alert('Error: ' + errorThrown);
+					alert('Error: ' + errorThrown);
 				}
 			});
 		});
