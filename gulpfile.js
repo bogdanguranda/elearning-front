@@ -27,7 +27,7 @@ gulp.task('styles', function() {
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
             'bower_components/nouislider/distribute/nouislider.min.css',
             'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
-            'app/styles/*.scss',
+            'app/components/**/styles/*.scss',
             'app/components/**/*.scss',
 
             ])
@@ -74,13 +74,19 @@ gulp.task('scripts', function(){
     return gulp.src([
                         'bower_components/jquery/dist/jquery.min.js',
                         'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                        'bower_components/moment/min/moment.min.js',
+                        'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+                        'bower_components/nouislider/distribute/nouislider.min.js', 
+                        'bower_components/Chart.js/Chart.min.js', 
                         'app/_include/scripts/raphael-min.js', 
+                        'bower_components/typeahead.js/dist/typeahead.jquery.js',
+                        'bower_components/jquery.pep/src/jquery.pep.js',
                         'app/components/**/*.js', 
                     ])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('public/assets/js'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('public/assets/js'))
         .pipe(notify({ message: 'Scripts task complete' }));
 });

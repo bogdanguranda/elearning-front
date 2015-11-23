@@ -1,0 +1,45 @@
+h1 Cursuri
+br
+button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
+button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Curs Nou
+button(id="btn-creare-user" type="button" class="btn btn-default hide") Creaza user boogie
+button(id="btn-logare-user" type="button" class="btn btn-default hide") Autentificare cu user-il boogie
+br
+div(class="container")
+
+	div(id="id01" class="row row-header")
+		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+			h4 Title
+		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+			h4 About
+		div(class="col-xs-7 col-sm-7 col-md-7 col-lg-7")
+			h4 Details
+		div(class="col-xs-1 col-sm-1 col-md-1 col-lg-1")
+			h4 Owner
+div(class="modal fade modal-danger", id="modal_id", tabindex="-1", role="dialog", aria-hidden="true")
+	div(class="modal-dialog")
+		div(class="modal-content")
+			div(class="modal-header")
+				h4 Adauga Curs
+			div(class="modal-body")
+				form(class="curs-nou" name="curs-nou")
+					label(class="label" for="owner") owner
+					br
+					input(type="text" name="owner" class="input-xlarge owner")
+					br
+					label(class="label" for="title") Title
+					br
+					input(type="text" name="title" class="input-xlarge title")
+					br
+					//h4(class="col-sm-4 modal-title")
+					label(class="label" for="about") About
+					br
+					input(type="text" name="about" class="input-xlarge about")
+					br
+					//h4(class="col-sm-4 modal-about")
+					label(class="label" for="details") Details
+					br
+					textarea(class="textarea details" name="details" rows="4" cols="50")  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			div(class="modal-footer")
+				button(type="button", class="btn btn-danger", data-dismiss="modal") Anuleaza
+				button(id="btn-adauga", type="submit", class="btn btn-success", value="Adauga", data-dismiss="modal") Adauga

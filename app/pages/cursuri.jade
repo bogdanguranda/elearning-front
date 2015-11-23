@@ -1,0 +1,155 @@
+extends ../components/common/page.jade
+
+block content
+	include ../components/cursuri/cursuri_content.jade
+block javascript
+	script(type="text/javascript").
+		$(function(){
+			var token_primit;
+			var le_token = '9d2ac15b-345b-475c-8bdd-36393eca3331';
+			$("#btn-refresh").on("click", function(){
+				$("#btn-refresh").text("Refresh Cursuri");
+				loadAJAX();
+			});
+			$("#btn-curs-nou").on("click", function(){
+				showPopup();
+			});
+			$("#btn-creare-user").on("click", function(){
+				$.postJSON = function(url, data) {
+					return jQuery.ajax({
+						'headers': {
+							'Content-Type': 'application/json',
+						},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'text',
+						'success': function (data, textStatus, jqXHR) {
+							alert('Success: ' + data);
+						},
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
+					});
+				};
+				var username1 = 'Boogiennout';
+				var firstName1 = 'Dudeacasdss';
+				var lastName1 = 'Dotdudasdd';
+				var email1 = 'Boogienou8@gmail.com';
+				var password1 = 'Labughi123';
+				var dataToSend = {
+					username: username1,
+					firstName: firstName1,
+					lastName: lastName1,
+					email: email1,
+					password: password1,
+				};
+				$.postJSON(
+					'http://localhost:8080/users', 
+					dataToSend
+				);
+			});			
+			$("#btn-logare-user").on("click", function(){
+				$.postJSON = function(url, data) {
+					return jQuery.ajax({
+						'headers': {
+							'Content-Type': 'application/json',
+						},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'text',
+						'success': function (data, textStatus, jqXHR) {
+							alert('Success: ' + data);
+						},
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
+					});
+				};
+				var username1 = 'Boogiennout';
+				var password1 = 'Labughi123';
+				var dataToSend = {
+					username: username1,
+					password: password1
+				};
+				token_primit = $.postJSON(
+					'http://localhost:8080/authenticate', 
+					dataToSend
+					);
+				console.log('Token primit: ' + token_primit);
+			});
+			$("#btn-adauga").on("click", function(){
+				$.postJSON = function(url, data, token, callback) {
+					return jQuery.ajax({
+					headers: {
+						'Content-Type': 'application/json',
+						'token': token
+					},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'text',
+						'success': callback
+					});
+				};
+				var titleToSend = $(".input-xlarge.title").val();
+				var aboutToSend = $(".input-xlarge.about").val();
+				var detailsToSend = $(".textarea.details").val();
+				var ownerToSend = $(".input-xlarge.owner").val();
+				var dataToSend = {
+					title: titleToSend,
+					about: aboutToSend,
+					details: detailsToSend,
+					owner: ownerToSend
+				};
+				$.postJSON(
+					"http://localhost:8080/courses", 
+					dataToSend,
+					le_token,
+					function(data, status){
+						console.log("Data: " + data + "\nStatus: " + status);
+				});
+			});
+			function showPopup(){
+				console.log("intra in functie showPopup");
+				$('#modal_id').modal('show');
+			}
+			function loadAJAX(){
+				$.getJSON = function(url, token, callback) {
+					return jQuery.ajax({
+						'headers': {
+							'Content-Type': 'application/json',
+							'token': token
+						},
+						'type': 'GET',
+						'url': url,
+						'dataType': 'json',
+						'success': callback,
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
+					});
+				};
+				
+				$.getJSON("http://localhost:8080/courses", le_token, function (data, status) {
+					var inside = "";
+					var i;
+					var row = [];
+					var th = document.getElementById("id01");
+					$(".container").empty();
+					$(".container").append(th);
+					for(i = 0; i < data.length; i++) {
+						row[i] = $("<div></div>").attr("class","row row-content");
+						$("#id01").after(row[i]);
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
+						inside += '<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">' + data[i].details + '</div>';
+						inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
+						$(row[i]).append(inside);
+						inside="";
+					}
+					console.log(status);
+				});
+			}
+		});

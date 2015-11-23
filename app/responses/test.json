@@ -1,0 +1,15 @@
+[
+	{
+		"id": 1,
+		"type": 1,
+		"status": "available"
+	},
+	{
+		"id": 2,
+		"type": 2,
+		"status": "selected",
+		"selected":[
+			"9A"
+		]
+	}
+]
