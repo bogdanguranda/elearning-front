@@ -3,7 +3,7 @@ block content
         header(class="clearfix")
             a(href="#", class="chat-close") x
 
-            h4 Ema Barac
+            h4(class="chat-box-name") Ema Barac
 
             span(class="chat-message-counter") 3
 
@@ -13,53 +13,53 @@ block content
                 
                 div(class="chat-message clearfix")
                     
-                    img(src="http://lorempixum.com/32/32/people", alt="", width="32", height="32")
+                    img(class="chat-image", src="http://lorempixum.com/32/32/people", alt="", width="32", height="32")
 
                     div(class="chat-message-content clearfix")
                         
                         span(class="chat-time") 13:35
 
-                        h5 Ema Barac
+                        h5(class="chat-message-name") Ema Barac
 
-                        p Am înteles că un om poate avea totul neavand nimic și nimic având totul.
-                hr
+                        p(class="chat-p") Am înteles că un om poate avea totul neavand nimic și nimic având totul.
+                hr(class="chat-hr")
 
                 div(class="chat-message clearfix")
                     
-                    img(src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32")
+                    img(class="chat-image" src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32")
 
                     div(class="chat-message-content clearfix")
                         
                         span(class="chat-time") 13:37
 
-                        h5 Emanuel Barac
+                        h5(class="chat-message-name") Emanuel Barac
 
-                        p Întreaga apă din mare nu poate scufunda un vapor, dacă nu pătrunde în interiorul navei. În mod similar negativitatea din lume nu te poate pune jos, decât dacă îi permiți să ajungă în tine.
+                        p(class="chat-p") Întreaga apă din mare nu poate scufunda un vapor, dacă nu pătrunde în interiorul navei. În mod similar negativitatea din lume nu te poate pune jos, decât dacă îi permiți să ajungă în tine.
 
-                hr
+                hr(class="chat-hr")
 
                 div(class="chat-message clearfix")
                     
-                    img(src="http://lorempixum.com/32/32/people" alt="" width="32" height="32")
+                    img(class="chat-image" src="http://lorempixum.com/32/32/people" alt="" width="32" height="32")
 
                     div(class="chat-message-content clearfix")
                         
                         span(class="chat-time") 13:38
 
-                        h5 Ema Barac
+                        h5(class="chat-message-name") Ema Barac
 
-                        p Da, asa este. Cata dreptate ai.
+                        p(class="chat-p") Da, asa este. Cata dreptate ai.
 
-                hr
+                hr(class="chat-hr")
 
             p(class="chat-feedback") Your partner is typing…
 
             form(action="#" method="post")
 
-                fieldset
+                fieldset(class="chat-fieldset")
                     
-                    input(type="text" placeholder="Type your message…" autofocus)
-                    input(type="hidden")
+                    input(class="chat-input" type="text" placeholder="Type your message…" autofocus)
+                    input(class="chat-input" type="hidden")
 block javascript
     script(src="assets/js/main.js")
     script(type="text/javascript").
