@@ -1,21 +1,26 @@
 h1 Cursuri
 br
-button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
-button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Curs Nou
-button(id="btn-creare-user" type="button" class="btn btn-default hide") Creaza user boogie
-button(id="btn-logare-user" type="button" class="btn btn-default hide") Autentificare cu user-il boogie
+div(class="container container-first")
+	div(class="row")
+		div(id="btns-cursuri", class="col-xs-10 col-sm-10 col-md-10 col-lg-10")
+			button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
+			button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Curs Nou
+		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right" style="background-color:gray;")
+			h3 Profile
+			span(class="profile-nume") Nume:
+			br
+			span(class="profile-status") Status:
 br
-div(class="container")
-
+div(class="container container-second")
 	div(id="id01" class="row row-header")
 		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
-			h4 Title
+			h3 Title
 		div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
-			h4 About
+			h3 About
 		div(class="col-xs-7 col-sm-7 col-md-7 col-lg-7")
-			h4 Details
+			h3 Details
 		div(class="col-xs-1 col-sm-1 col-md-1 col-lg-1")
-			h4 Owner
+			h3 Owner
 div(class="modal fade modal-danger", id="modal_id", tabindex="-1", role="dialog", aria-hidden="true")
 	div(class="modal-dialog")
 		div(class="modal-content")

@@ -5,8 +5,8 @@ block content
 block javascript
 	script(type="text/javascript").
 		$(function(){
-			var token_primit;
-			var le_token = '9d2ac15b-345b-475c-8bdd-36393eca3331';
+			$(".profile-nume").text("Nume: " + sessionStorage.username);
+			$(".profile-status").text("Status: " + sessionStorage.role);
 			$("#btn-refresh").on("click", function(){
 				$("#btn-refresh").text("Refresh Cursuri");
 				loadAJAX();
@@ -137,14 +137,14 @@ block javascript
 					var i;
 					var row = [];
 					var th = document.getElementById("id01");
-					$(".container").empty();
-					$(".container").append(th);
+					$(".container.container-second").empty();
+					$(".container.container-second").append(th);
 					for(i = 0; i < data.length; i++) {
 						row[i] = $("<div></div>").attr("class","row row-content");
 						$("#id01").after(row[i]);
 						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
 						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
-						inside += '<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">' + data[i].details + '</div>';
+						inside += '<div class="col-xs-7 col-sm-7 col-md-5 col-lg-7">' + data[i].details + '</div>';
 						inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
 						$(row[i]).append(inside);
 						inside="";
