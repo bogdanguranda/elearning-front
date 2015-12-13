@@ -7,78 +7,16 @@ block javascript
 		$(function(){
 			$(".profile-nume").text("Nume: " + sessionStorage.username);
 			$(".profile-status").text("Status: " + sessionStorage.role);
+			if (sessionStorage.role == "student"){
+				$("#btn-curs-nou").addClass('hide');
+			}
 			$("#btn-refresh").on("click", function(){
 				$("#btn-refresh").text("Refresh Cursuri");
 				loadAJAX();
 			});
 			$("#btn-curs-nou").on("click", function(){
 				showPopup();
-			});
-			$("#btn-creare-user").on("click", function(){
-				$.postJSON = function(url, data) {
-					return jQuery.ajax({
-						'headers': {
-							'Content-Type': 'application/json',
-						},
-						'type': 'POST',
-						'url': url,
-						'data': JSON.stringify(data),
-						'dataType': 'text',
-						'success': function (data, textStatus, jqXHR) {
-							alert('Success: ' + data);
-						},
-						'error': function (jqXHR, textStatus, errorThrown) {
-							alert('Error: ' + errorThrown);
-						}
-					});
-				};
-				var username1 = 'Boogiennout';
-				var firstName1 = 'Dudeacasdss';
-				var lastName1 = 'Dotdudasdd';
-				var email1 = 'Boogienou8@gmail.com';
-				var password1 = 'Labughi123';
-				var dataToSend = {
-					username: username1,
-					firstName: firstName1,
-					lastName: lastName1,
-					email: email1,
-					password: password1,
-				};
-				$.postJSON(
-					'http://localhost:8080/users', 
-					dataToSend
-				);
-			});			
-			$("#btn-logare-user").on("click", function(){
-				$.postJSON = function(url, data) {
-					return jQuery.ajax({
-						'headers': {
-							'Content-Type': 'application/json',
-						},
-						'type': 'POST',
-						'url': url,
-						'data': JSON.stringify(data),
-						'dataType': 'text',
-						'success': function (data, textStatus, jqXHR) {
-							alert('Success: ' + data);
-						},
-						'error': function (jqXHR, textStatus, errorThrown) {
-							alert('Error: ' + errorThrown);
-						}
-					});
-				};
-				var username1 = 'Boogiennout';
-				var password1 = 'Labughi123';
-				var dataToSend = {
-					username: username1,
-					password: password1
-				};
-				token_primit = $.postJSON(
-					'http://localhost:8080/authenticate', 
-					dataToSend
-					);
-				console.log('Token primit: ' + token_primit);
-			});
+			});		
 			$("#btn-adauga").on("click", function(){
 				$.postJSON = function(url, data, token, callback) {
 					return jQuery.ajax({
