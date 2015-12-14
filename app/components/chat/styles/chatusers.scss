@@ -1,4 +1,4 @@
-/** {
+/* {
     margin: 0;
     padding: 0;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
@@ -9,16 +9,28 @@
 }*/
 
 .bubble-left {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     float: left;
     clear: both;
     background: #B7CC90;
 }
 
 .bubble-left:hover {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #A9C07F;
 }
 
 .bubble-left:before {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     content: " ";
     display: block;
     position: relative;
@@ -36,6 +48,10 @@
 }
 
 .bubble-right {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     float: right;
     clear: both;
     text-align: right;
@@ -43,10 +59,18 @@
 }
 
 .bubble-right:hover {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #82A6C1;
 }
 
 .bubble-right:before {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     content: " ";
     display: block;
     position: relative;
@@ -63,6 +87,10 @@
 }
 
 .message-container {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     margin: auto;
     margin-top: 2.5%;
@@ -73,6 +101,10 @@
 }
 
 .message-container > .message-north {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     width: 100%;
     height: 80%;
 
@@ -82,6 +114,10 @@
 }
 
 .message-container > .message-south {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     width: 100%;
     height: 20%;
     padding: 1%;
@@ -92,6 +128,10 @@
 }
 
 .message-container > .message-north > .message-user-list {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     list-style-type: none;
     float: left;
     clear: left;
@@ -102,6 +142,10 @@
 }
 
 .message-container > .message-north > .message-user-list a {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     padding: 10px;
     height: 40px; /*Keep height same as img thumbnail height*/
@@ -116,6 +160,10 @@
 }
 
 .message-container > .message-north > .message-user-list a:hover {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #9E9E9E;
 
     -webkit-transition: all ease .2s;
@@ -126,6 +174,10 @@
 }
 
 .message-container > .message-north > .message-user-list a .user-img {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     float: left;
     height: 40px;
@@ -134,10 +186,18 @@
 }
 
 .message-container > .message-north > .message-user-list a .user-title {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     margin-left: 5px;
 }
 
 .message-container > .message-north > .message-user-list a .user-desc {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     padding-left: 5px;
     padding-top: 5px;
     font-size: 12px;
@@ -148,19 +208,35 @@
 }
 
 .message-container > .message-north > .message-user-list a.active {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #BFBFBF;
 }
 
 .message-container > .message-north > .message-user-list a.highlight {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #90B2CC;
 }
 
 .message-container > .message-north > .message-user-list a.highlight .user-title,
 .message-container > .message-north > .message-user-list a.highlight .user-desc {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     font-weight: bold;
 }
 
 .message-container > .message-north > .message-thread {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     float: right;
     width: 75%;
     height: 100%;
@@ -176,6 +252,10 @@
 }
 
 .message-container > .message-north > .message-thread > .message {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     min-width: 40%;
     max-width: 70%;
     margin: 5px;
@@ -185,6 +265,10 @@
 }
 
 .message-container > .message-north > .message-thread > .message > p {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     clear: both;
     margin-left: 3px;
@@ -193,6 +277,10 @@
 }
 
 .message-container > .message-north > .message-thread > .message label {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     margin-top: -13px;
     font-size: 13px;
     font-weight: bold;
@@ -201,12 +289,20 @@
 }
 
 .message-container > .message-north > .message-thread > .message .message-user {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     float: left;
     margin-left: 3px;
 }
 
 .message-container > .message-north > .message-thread > .message .message-timestamp {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: block;
     float: right;
     margin-right: 3px;
@@ -214,6 +310,10 @@
 }
 
 .message-container > .message-south > textarea {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     width: 100%;
     height: 65%;
     padding: 7px 10px;
@@ -233,10 +333,18 @@
 }
 
 .message-container > .message-south > textarea:focus {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: #FFF;
 }
 
 .message-container > .message-south > button {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     display: inline-block;
     float: right;
     margin-top: 0px;
@@ -253,6 +361,10 @@
 }
 
 .message-container > .message-south > button:hover {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     background: -webkit-linear-gradient(#FFFFFF, #DFDFDF);
     background:    -moz-linear-gradient(#FFFFFF, #DFDFDF);
     background:      -o-linear-gradient(#FFFFFF, #DFDFDF);
@@ -260,6 +372,10 @@
 }
 
 .message-container > .message-south > button:active {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "Droid Sans", sans-serif;
+
     box-shadow: inset 0px 0px 10px #5A5A5A;
     background: -webkit-linear-gradient(#E9E9E9, #F5F5F5);
     background:    -moz-linear-gradient(#E9E9E9, #F5F5F5);

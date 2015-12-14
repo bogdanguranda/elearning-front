@@ -46,5 +46,51 @@ block content
                         p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat nunc ut nibh interdum tempus. Donec at lorem eget sapien iaculis porttitor id quis ligula feugiat nunc ut nibh justo eget elit aliquet interdum tempus.
 
             div(class="message-south")
-                textarea(cols="20", rows="3")
+                textarea(class="textarea-chatusers", cols="20", rows="3")
                 button Send
+block javascript
+    script(src="assets/js/main.js")
+    script(type="text/javascript").
+        $(document).ready(function() {
+            var receiverUsername = 'emabarac'
+            $('button').click(function(e) {
+                
+                    var senderUsername = $('.active').children('.user-title').val().toString();
+                    //var receiverUsername = $('.chat-message-name').val().toString(); 
+                    var payload = {
+                        "senderUsername": senderUsername,    
+                        "receiverUsername": receiverUsername,
+                        "timestamp": null,    
+                        "message": $('.textarea-chatusers').val().toString()
+                        };
+                    $.ajax({
+                url: "http://localhost:8080/messages",
+                type: "POST",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json', 'token':sessionStorage.accessToken},
+                data: JSON.stringify(payload),
+                success: function (data, textStatus, jqXHR) {
+                    //sessionStorage.setItem("accessToken",data);
+                    //alert('Success: ' + sessionStorage.accessToken);
+                    //window.location.href='cursuri.html';
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+                
+            });
+
+                $.ajax({
+                url: "http://localhost:8080/messages/" + senderUsername + receiverUsername,
+                type: "POST",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
+                data: JSON.stringify(payload),
+                success: function (data, textStatus, jqXHR) {
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+            });  
+            });});
