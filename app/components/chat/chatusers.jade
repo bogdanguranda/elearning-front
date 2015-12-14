@@ -52,16 +52,32 @@ block javascript
     script(src="assets/js/main.js")
     script(type="text/javascript").
         $(document).ready(function() {
-            var receiverUsername = 'emabarac'
+            var senderUsername = 'Bryan Adams';
             $('button').click(function(e) {
                 
-                    var senderUsername = $('.active').children('.user-title').val().toString();
-                    //var receiverUsername = $('.chat-message-name').val().toString(); 
+                    var receiverUsername = $('.active').children('.user-title').text();
+                    var today = new Date();
+
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    var h = today.getHours();
+                    var m = today.getMinutes();
+
+                    if(dd<10) {
+                        dd='0'+dd;
+                    }    
+
+                    if(mm<10) {
+                    mm='0'+mm;
+                    } 
+
+                    today = mm+'-'+dd+'-'+yyyy + ' ' + h + ':' + m;
                     var payload = {
                         "senderUsername": senderUsername,    
                         "receiverUsername": receiverUsername,
-                        "timestamp": null,    
-                        "message": $('.textarea-chatusers').val().toString()
+                        "timestamp": today,    
+                        "message": $('.textarea-chatusers').text()
                         };
                     $.ajax({
                 url: "http://localhost:8080/messages",
@@ -81,7 +97,7 @@ block javascript
             });
 
                 $.ajax({
-                url: "http://localhost:8080/messages/" + senderUsername + receiverUsername,
+                url: "http://localhost:8080/messages/" + senderUsername + '/' + receiverUsername,
                 type: "POST",
                 dataType: "text",
                 headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
