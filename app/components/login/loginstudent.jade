@@ -21,7 +21,9 @@ block javascript
 				headers: {'Content-Type': 'application/json'},
 				data: JSON.stringify(payload),
 				success: function (data, textStatus, jqXHR) {
-					sessionStorage.setItem("accessToken",data);
+					var tok = JSON.parse(data);
+					sessionStorage.setItem("accessToken", tok.token);
+					sessionStorage.setItem("role", tok.role);
 					alert('Success: ' + sessionStorage.accessToken);
 					window.location.href='cursuri.html';
 				},
