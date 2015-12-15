@@ -79,4 +79,45 @@ block javascript
 
             });
 
-        });
+            $('.chat-input').on("keypress", function(e) {
+                if (e.keyCode == 13) {
+                    var senderUsername = $('.chat-message-name').val().toString();
+                    var receiverUsername = $('.chat-message-name').val().toString(); 
+                    var payload = {
+                        "senderUsername": "emabarac",    
+                        "receiverUsername": "emabarac",
+                        "timestamp": new Date(),    
+                        "message": $('.chat-input').val().toString()
+                        };
+                    $.ajax({
+                url: "http://localhost:8080/messages",
+                type: "POST",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json'},
+                data: JSON.stringify(payload),
+                success: function (data, textStatus, jqXHR) {
+                    sessionStorage.setItem("accessToken",data);
+                    alert('Success: ' + sessionStorage.accessToken);
+                    window.location.href='cursuri.html';
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+            });
+
+                $.ajax({
+                url: "http://localhost:8080/messages/" + "emabarac/" + "emabarac",
+                type: "POST",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json', 'token':},
+                data: JSON.stringify(payload),
+                success: function (data, textStatus, jqXHR) {
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+            });
+
+            }    
+            });});
