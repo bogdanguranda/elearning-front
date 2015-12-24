@@ -21,7 +21,6 @@ block javascript
 				headers: {'Content-Type': 'application/json'},
 				data: JSON.stringify(payload),
 				success: function (data, textStatus, jqXHR) {
-					sessionStorage.setItem("accessToken",data);
 					var parsedData = JSON.parse(data);
 					sessionStorage.setItem("accessToken", parsedData.token);
 					sessionStorage.setItem("role", parsedData.role);
