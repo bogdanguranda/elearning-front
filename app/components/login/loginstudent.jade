@@ -26,7 +26,8 @@ block javascript
 					sessionStorage.setItem("role", parsedData.role);
 					sessionStorage.setItem("currentUser", parsedData.username)
 
-					alert('Success: ' + sessionStorage.accessToken);
+					//alert('Success: ' + sessionStorage.accessToken);
+
 					window.location.href='cursuri.html';
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
