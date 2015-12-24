@@ -24,7 +24,7 @@ block javascript
 					var tok = JSON.parse(data);
 					sessionStorage.setItem("accessToken", tok.token);
 					sessionStorage.setItem("role", tok.role);
-					alert('Success: ' + sessionStorage.accessToken);
+					//alert('Success: ' + sessionStorage.accessToken);
 					window.location.href='cursuri.html';
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
