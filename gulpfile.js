@@ -81,7 +81,8 @@ gulp.task('scripts', function(){
                         'app/_include/scripts/raphael-min.js', 
                         'bower_components/typeahead.js/dist/typeahead.jquery.js',
                         'bower_components/jquery.pep/src/jquery.pep.js',
-                        'app/components/**/*.js', 
+                        'app/components/**/*.js',
+                        'node_modules/moment/moment.js',
                     ])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('public/assets/js'))
