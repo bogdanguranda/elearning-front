@@ -14,7 +14,6 @@ block javascript
     script(type="text/javascript").
         function getThreadMessages(senderUsername, receiverUsername)
             {
-
                 $.ajax({
                 url: "http://localhost:8080/messages/" + senderUsername + "/" + receiverUsername,
                 type: "GET",
@@ -23,6 +22,9 @@ block javascript
                 success: function (data, textStatus, jqXHR) {
                     var messages = JSON.parse(data);
                     for (var i = 0; i < messages.length; i++) {
+                        var date = moment(messages[i].timestamp).format('YYYY-MM-DD HH:mm');
+
+                        messages[i].timestamp = date;
                         if(messages[i].senderUsername == senderUsername)
                         {
                             $(".message-thread").append("<div class='message bubble-right'><label class='message-user'>" + messages[i].senderUsername + 
