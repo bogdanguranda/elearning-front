@@ -4,7 +4,7 @@ block content
 	include ../components/cursuri/cursuri_content.jade
 block javascript
 	script(type="text/javascript").
-		$(function(){
+		$(document).ready(function(){
 			//alert(sessionStorage.accessToken);
 			//alert(sessionStorage.role);
 			$(".profile-nume").text("Nume: " + sessionStorage.username);
