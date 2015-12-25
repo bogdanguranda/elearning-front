@@ -1,0 +1,67 @@
+extends ../components/common/page.jade
+
+block content
+	include ../components/administrator/administrator_content.jade
+block javascript
+	script(type="text/javascript").
+		//alert("Welecome! You're doing a great job ;) !");
+		$(document).ready(function(){
+			$("#btn-change-role").on("click", function(){
+				alert("Role Changed!");
+			});
+			function getUsers(){
+				$.getJSON = function(url, token, callback) {
+					return jQuery.ajax({
+						'headers': {
+							'Content-Type': 'application/json',
+							'token': token
+						},
+						'type': 'GET',
+						'url': url,
+						'dataType': 'json',
+						'success': callback,
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
+					});
+				};
+				
+				$.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
+					var inside = "";
+					var i;
+					var row = [];
+					var th = document.getElementById("table-users");
+					$(".container.container-users").empty();
+					$(".container.container-users").append(th);
+					buton = '<button id="btn-change" type="button" class="btn btn-success btn-change-role">Change Role</button>';
+					for(i = 0; i < data.length; i++) {
+						row[i] = $("<div></div>").attr("class","row row-content");
+						$("#table-users").after(row[i]);
+						select_list = '<div class="form-group sel1">' + 
+								'<select class="form-control">' + 
+									'<option value="opt-administrator">Administrator</option>' +
+									'<option value="opt-profesor">Profesor</option>' +
+									'<option value="opt-student">Student</option>' +
+								'</select>' +
+							'</div>';
+						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 "><h5>' + data[i].owner + '</h5></div>';
+						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">' + select_list + '</div>';
+						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">' + buton + '</div>';
+						$(row[i]).append(inside);
+						// console.log(data[i].role);
+						// if (data[i].role == "administrator"){
+						// 	$(".form-control option[value = opt-administrator]").prop("selected", "selected")
+						// }
+						// if (data[i].role == "profesor"){
+						// 	$(".form-control option[value = opt-profesor]").prop("selected", "selected")
+						// }
+						// if (data[i].role == "student"){
+						// 	$(".form-control option[value = opt-student]").prop("selected", "selected")
+						// }
+						inside="";
+					}
+					console.log(status);
+				});
+			}
+			getUsers();
+		});
