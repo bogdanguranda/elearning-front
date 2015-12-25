@@ -43,3 +43,58 @@ label{
 .container{
 	//margin-top:10px;
 }
+
+.title1 {
+
+	display: inline;
+
+	position: relative;
+
+	font: 100px Helvetica, Sans-Serif;
+
+	letter-spacing: -5px;
+
+	color: #8bceec; 
+
+	margin-left: 5%;
+}
+
+
+
+.title1:after {
+
+	content: "Elearning";
+
+	position: absolute; left: 8px; top: 5px;
+
+	color: #9acd50;   
+
+}
+
+
+.title2 {
+
+	display: inline;
+
+	position: relative;
+
+	font: 80px Helvetica, Sans-Serif;
+
+	letter-spacing: -5px;
+
+	color: #8bceec; 
+
+	margin-left: 40%;
+}
+
+
+
+.title2:after {
+
+	content: "Application";
+
+	position: absolute; left: 8px; top: 3px;
+
+	color: #9acd50;   
+
+}
