@@ -24,7 +24,7 @@ block javascript
 					var parsedData = JSON.parse(data);
 					sessionStorage.setItem("accessToken", parsedData.token);
 					sessionStorage.setItem("role", parsedData.role);
-					sessionStorage.setItem("currentUser", parsedData.username)
+					sessionStorage.setItem("currentUser", $('#username').val().toString())
 
 					//alert('Success: ' + sessionStorage.accessToken);
 
