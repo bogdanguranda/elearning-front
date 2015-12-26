@@ -145,7 +145,6 @@ gulp.task('server', function (done) {
 
     /* Serves all the static files */
     app.get(/^(.+)$/, function (req, res) {
-        console.log('static file request : ' + req.params);
         res.sendfile(__dirname + '/' + basePath + '/' + req.params[0]);
     });
 
