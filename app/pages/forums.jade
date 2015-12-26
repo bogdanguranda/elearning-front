@@ -1,48 +1,87 @@
 extends ../components/common/page.jade
 
 block content
-	//h1 Forum
-	div(class="logo")
-	div(class="forums-block")
-		button(class="newForum", type="submit") Discutie noua
-		ul
-			li
-				div(class="forumName")
-					p Name1
-				div(class="forumDescription")
-					p 
-						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
-						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
-						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
-						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
-						| Description1 Description1 Description1 Description1 Description1 Description1 Description1
-			li 
-				div(class="forumName")
-					p Name2
-				div(class="forumDescription")
-					p Description2
-
+	include ../components/forum/forum_content.jade
 block javascript
 	script(type="text/javascript").
-		$("li").on("click", function(){
-			window.location = "/forum.html"
-		});
-		$(document).ready(function(){
-			$.ajax({
-				url: "http://localhost:8080/messages",
-				type: "GET",
-				dataType: "text",
-				data: null,
-				headers: {'Content-Type': 'application/json',
-							'token': sessionStorage.accessToken
-				},
-				success: function(data, textStatus, jqXHR) {
-					alert('Success' + data);
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					alert('Error ' + errorThrown);
-				}
+		$(function(){
+			$(".profile-nume").text("Nume: " + sessionStorage.username);
+			$(".profile-status").text("Status: " + sessionStorage.role);
+			if (sessionStorage.role == "student"){
+				$("#btn-curs-nou").addClass('hide');
+			}
+			$("#btn-refresh").on("click", function(){
+				$("#btn-refresh").text("Refresh Forumuri");
+				loadAJAX();
 			});
+			$("#btn-forum-nou").on("click", function(){
+				showPopup();
+			});		
+			$("#btn-adauga").on("click", function(){
+				$.postJSON = function(url, data, token, callback) {
+					return jQuery.ajax({
+					headers: {
+						'Content-Type': 'application/json',
+						'token': token
+					},
+						'type': 'POST',
+						'url': url,
+						'data': JSON.stringify(data),
+						'dataType': 'text',
+						'success': callback
+					});
+				};
+				var titleToSend = $(".input-xlarge.title").val();
+				var ownerToSend = $(".input-xlarge.owner").val();
+				var dataToSend = {
+					title: titleToSend,
+					owner: ownerToSend
+				};
+				$.postJSON(
+					"http://localhost:8080/threads", 
+					dataToSend,
+					sessionStorage.accessToken,
+					function(data, status){
+						console.log("Data: " + data + "\nStatus: " + status);
+				});
+			});
+			function showPopup(){
+				console.log("intra in functie showPopup");
+				$('#modal_id').modal('show');
+			}
+			function loadAJAX(){
+				$.getJSON = function(url, token, callback) {
+					return jQuery.ajax({
+						'headers': {
+							'Content-Type': 'application/json',
+							'token': token
+						},
+						'type': 'GET',
+						'url': url,
+						'dataType': 'json',
+						'success': callback,
+						'error': function (jqXHR, textStatus, errorThrown) {
+							alert('Error: ' + errorThrown);
+						}
+					});
+				};
+				
+				$.getJSON("http://localhost:8080/threads", sessionStorage.accessToken, function (data, status) {
+					var inside = "";
+					var i;
+					var row = [];
+					var th = document.getElementById("id01");
+					$(".container.container-second").empty();
+					$(".container.container-second").append(th);
+					for(i = 0; i < data.length; i++) {
+						row[i] = $("<div></div>").attr("class","row row-content");
+						$("#id01").after(row[i]);
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
+						inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].owner + '</div>';
+						$(row[i]).append(inside);
+						inside="";
+					}
+					console.log(status);
+				});
+			}
 		});
-
-		

@@ -5,10 +5,12 @@ block content
 block javascript
 	script(type="text/javascript").
 		$(function(){
+			//alert(sessionStorage.accessToken);
+			//alert(sessionStorage.role);
 			$(".profile-nume").text("Nume: " + sessionStorage.username);
 			$(".profile-status").text("Status: " + sessionStorage.role);
 			if (sessionStorage.role == "student"){
-				$("#btn-curs-nou").addClass('hide');
+				//$("#btn-curs-nou").addClass('hide');
 			}
 			$("#btn-refresh").on("click", function(){
 				$("#btn-refresh").text("Refresh Cursuri");
