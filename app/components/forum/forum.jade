@@ -1,3 +1,31 @@
 link(href="assets/css/main.css", rel="stylesheet", id="main-css")
 script(src="assets/js/main.js")
 table.flatTable
+div(class="modal fade modal-danger", id="modalAddTopic", tabindex="-1", role="dialog", aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                h4 New thread
+            div(class="modal-body")
+                form(class="curs-nou" name="curs-nou")
+                    label(class="label" for="title") Title
+                    br
+                    input(type="text" name="title" class="input-xlarge title")
+                    br
+            div(class="modal-footer")
+                button(type="button", class="btn btn-danger", data-dismiss="modal") Cancel
+                button(id="btn-adauga", type="submit", class="btn btn-success", value="Ok", data-dismiss="modal") Ok
+div(class="modal fade modal-danger", id="modalAddComment", tabindex="-1", role="dialog", aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                h4 New comment
+            div(class="modal-body")
+                form(class="curs-nou" name="curs-nou")
+                    label(class="label" for="title") Comment
+                    br
+                    textarea(class="textarea comment" name="comment" rows="4" cols="50")
+                    br
+            div(class="modal-footer")
+                button(type="button", class="btn btn-danger", data-dismiss="modal") Cancel
+                button(id="btn-adauga", type="submit", class="btn btn-success", value="Ok", data-dismiss="modal") Ok

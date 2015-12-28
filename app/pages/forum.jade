@@ -37,9 +37,14 @@ block javascript
                 var table = document.getElementsByClassName("flatTable")[0];
                 table.innerHTML = '';
 
-                var inside = '<tr class="titleTr"><td class="titleTd">Threads</td><td class="plusTd"></td></tr>';
+                var inside = '<tr class="titleTr"><td class="titleTd">Threads</td>' +
+                        '<td style="cursor: pointer;" id="addTopicButton" class="plusTd"></tr>';
                 inside += '<tr class="headingTr"><td>Title</td><td>Owner</td></tr>';
                 $('table.flatTable').append(inside);
+
+                $("#addTopicButton").on("click", function () {
+                    $('#modalAddTopic').modal('show');
+                });
 
                 $.getJSON(url, sessionStorage.accessToken, function (data, status) {
                     var i;
@@ -59,9 +64,14 @@ block javascript
                 var table = document.getElementsByClassName("flatTable")[0];
                 table.innerHTML = '';
 
-                var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">Comments</td><td class="plusTd"></td></tr>';
+                var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">Comments</td>' +
+                        '<td style="cursor: pointer;" id="addCommentButton" class="plusTd"></tr>';
                 inside += '<tr class="headingTr"><td>Owner</td><td>Message</td><td>Timestamp</td></tr>';
                 $('table.flatTable').append(inside);
+
+                $("#addCommentButton").on("click", function () {
+                    $('#modalAddComment').modal('show');
+                });
 
                 $.getJSON(url, sessionStorage.accessToken, function (data, status) {
                     var i;
