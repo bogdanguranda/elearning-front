@@ -1,19 +1,136 @@
-extends ../components/common/page.jade
-
 block content
-	//h1 Forum
-	div(class="logo")
-	div(class="forum-block")
-		textarea(name="Message" id="message" placeholder="Post here...")
-		button(id = "post" class="btn-post", type="submit") Post
-		p ABC
-
+    include ../components/forum/forum.jade
 block javascript
-	script(type="text/javascript").
-		$(document).ready(function(){
-			$("button").on("click", function(){
-				var msg = $("textarea").val();
-				$("p").append(msg);
-			})
-		})
-		
+    script(type="text/javascript").
+        $(function () {
+            $.getJSON = function (url, token, callback) {
+                return jQuery.ajax({
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'token': token
+                    },
+                    'type': 'GET',
+                    'url': url,
+                    'dataType': 'json',
+                    'success': callback,
+                    'error': function (jqXHR, textStatus, errorThrown) {
+                        alert('Error: ' + errorThrown);
+                    }
+                });
+            };
+
+            $.getJSON("http://localhost:8080/topics", sessionStorage.accessToken, function (data, status) {
+                var inside = '<tr class="titleTr"><td class="titleTd">Topics</td></tr>';
+                inside += '<tr class="headingTr"><td colspan="2">Title</td></tr>';
+                $('table.flatTable').append(inside);
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    inside = "";
+                    inside += '<tr><td colspan="2"><a onclick="openTopic(\'' + data[i].title + '\')">' + data[i].title + '</a></td></tr>';
+                    $('table.flatTable').append(inside);
+                }
+            });
+
+            this.openTopic = function (topicTitle) {
+                var url = "http://localhost:8080/threads/topic/" + encodeURIComponent(topicTitle);
+
+                var table = document.getElementsByClassName("flatTable")[0];
+                table.innerHTML = '';
+
+                var inside = '<tr class="titleTr"><td class="titleTd">Threads</td>' +
+                        '<td style="cursor: pointer;" id="addTopicButton" class="plusTd"></tr>';
+                inside += '<tr class="headingTr"><td>Title</td><td>Owner</td></tr>';
+                $('table.flatTable').append(inside);
+
+                $("#addTopicButton").on("click", function () {
+                    $('#modalAddTopic').modal('show');
+                });
+
+                $("#buttonAddThread").on("click", function () {
+                    var threadTitle = $(".input-xlarge.title").val();
+                    var dataToSend = {title: threadTitle, topic: topicTitle, owner: sessionStorage.currentUser};
+
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': sessionStorage.accessToken
+                        },
+                        'type': 'POST',
+                        'url': 'http://localhost:8080/threads',
+                        'data': JSON.stringify(dataToSend),
+                        'dataType': 'text',
+                        'success': function () {
+                            var inside = "";
+                            inside += '<tr><td><a onclick="openThread(\'' + dataToSend.topic + '\', \'' + dataToSend.title + '\')">'
+                                    + dataToSend.title + '</a></td><td>' + dataToSend.owner + '</td></tr>';
+                            $('table.flatTable').append(inside);
+                        }
+                    });
+                });
+
+                $.getJSON(url, sessionStorage.accessToken, function (data, status) {
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        inside = "";
+                        inside += '<tr><td><a onclick="openThread(\'' + data[i].topic + '\', \'' + data[i].title + '\')">'
+                                + data[i].title + '</a></td><td>' + data[i].owner + '</td></tr>';
+                        $('table.flatTable').append(inside);
+                    }
+                });
+            };
+
+            this.openThread = function (topicTitle, threadTitle) {
+                var url = "http://localhost:8080/comments/thread?topicTitle=" + encodeURIComponent(topicTitle);
+                url += "&threadTitle=" + encodeURIComponent(threadTitle);
+
+                var table = document.getElementsByClassName("flatTable")[0];
+                table.innerHTML = '';
+
+                var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">Comments</td>' +
+                        '<td style="cursor: pointer;" id="addCommentButton" class="plusTd"></tr>';
+                inside += '<tr class="headingTr"><td>Owner</td><td>Message</td><td>Timestamp</td></tr>';
+                $('table.flatTable').append(inside);
+
+                $("#addCommentButton").on("click", function () {
+                    $('#modalAddComment').modal('show');
+                });
+
+                $("#buttonAddComment").on("click", function () {
+                    var comment = $(".textarea.comment").val();
+                    var dataToSend = {
+                        id: null, owner: sessionStorage.currentUser, topic: topicTitle, thread: threadTitle,
+                        message: comment, timeStamp: null
+                    };
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': sessionStorage.accessToken
+                        },
+                        'type': 'POST',
+                        'url': 'http://localhost:8080/comments',
+                        'data': JSON.stringify(dataToSend),
+                        'dataType': 'text',
+                        'success': function () {
+                            var inside = "";
+                            dataToSend.timeStamp = moment(new Date()).format('YYYY-MM-DD HH:mm');
+                            inside += '<tr><td>' + dataToSend.owner + '</td><td>' + dataToSend.message + '</td><td>'
+                                    + dataToSend.timeStamp + '</td></tr>';
+                            $('table.flatTable').append(inside);
+                        }
+                    });
+                });
+
+                $.getJSON(url, sessionStorage.accessToken, function (data, status) {
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        inside = "";
+
+                        data[i].timestamp = moment(data[i].timestamp).format('YYYY-MM-DD HH:mm');
+
+                        inside += '<tr><td>' + data[i].owner + '</td><td>' + data[i].message + '</td><td>'
+                                + data[i].timestamp + '</td></tr>';
+                        $('table.flatTable').append(inside);
+                    }
+                });
+            };
+        });
