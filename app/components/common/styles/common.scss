@@ -6,7 +6,7 @@ body {
 }
 
 .background_image {
-  background: url('..\\images\\tree.png') no-repeat;
+  background: url('../images/tree.png') no-repeat;
   background-size: contain;
   background-position: center;
   position: fixed;
@@ -38,10 +38,6 @@ label {
   color: black !important;
   font-size: 14px !important;
   padding-left: 0 !important;
-}
-
-.container {
-  //margin-top:10px;
 }
 
 .title1 {

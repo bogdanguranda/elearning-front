@@ -1,0 +1,94 @@
+extends ../components/common/page.jade
+
+block content
+    include ../components/courses/courses.jade
+block javascript
+    script(type="text/javascript").
+        $(function () {
+            $(".profile-nume").text("Nume: " + sessionStorage.username);
+            $(".profile-status").text("Status: " + sessionStorage.role);
+            if (sessionStorage.role == "student") {
+                $("#btn-curs-nou").addClass('hide');
+            }
+            $("#btn-refresh").on("click", function () {
+                $("#btn-refresh").text("Refresh Cursuri");
+                loadAJAX();
+            });
+            $("#btn-curs-nou").on("click", function () {
+                showPopup();
+            });
+            $("#btn-adauga").on("click", function () {
+                $.postJSON = function (url, data, token, callback) {
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': token
+                        },
+                        'type': 'POST',
+                        'url': url,
+                        'data': JSON.stringify(data),
+                        'dataType': 'text',
+                        'success': callback
+                    });
+                };
+                var titleToSend = $(".input-xlarge.title").val();
+                var aboutToSend = $(".input-xlarge.about").val();
+                var detailsToSend = $(".textarea.details").val();
+                var ownerToSend = $(".input-xlarge.owner").val();
+                var dataToSend = {
+                    title: titleToSend,
+                    about: aboutToSend,
+                    details: detailsToSend,
+                    owner: ownerToSend
+                };
+                $.postJSON(
+                        "http://localhost:8080/courses",
+                        dataToSend,
+                        sessionStorage.accessToken,
+                        function (data, status) {
+                            console.log("Data: " + data + "\nStatus: " + status);
+                        });
+            });
+            function showPopup() {
+                console.log("intra in functie showPopup");
+                $('#modal_id').modal('show');
+            }
+
+            function loadAJAX() {
+                $.getJSON = function (url, token, callback) {
+                    return jQuery.ajax({
+                        'headers': {
+                            'Content-Type': 'application/json',
+                            'token': token
+                        },
+                        'type': 'GET',
+                        'url': url,
+                        'dataType': 'json',
+                        'success': callback,
+                        'error': function (jqXHR, textStatus, errorThrown) {
+                            alert('Error: ' + errorThrown);
+                        }
+                    });
+                };
+
+                $.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
+                    var inside = "";
+                    var i;
+                    var row = [];
+                    var th = document.getElementById("id01");
+                    $(".container.container-second").empty();
+                    $(".container.container-second").append(th);
+                    for (i = 0; i < data.length; i++) {
+                        row[i] = $("<div></div>").attr("class", "row row-content");
+                        $("#id01").after(row[i]);
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
+                        inside += '<div class="col-xs-7 col-sm-7 col-md-5 col-lg-7">' + data[i].details + '</div>';
+                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
+                        $(row[i]).append(inside);
+                        inside = "";
+                    }
+                    console.log(status);
+                });
+            }
+        });
