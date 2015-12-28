@@ -1,5 +1,5 @@
 block content
-    include ../components/forum/forumTopics.jade
+    include ../components/forum/forum.jade
 block javascript
     script(type="text/javascript").
         $(function () {
@@ -20,7 +20,7 @@ block javascript
             };
 
             $.getJSON("http://localhost:8080/topics", sessionStorage.accessToken, function (data, status) {
-                var inside = '<tr class="titleTr"><td class="titleTd">Topics</td><td class="plusTd"></td></tr>';
+                var inside = '<tr class="titleTr"><td class="titleTd">Topics</td></tr>';
                 inside += '<tr class="headingTr"><td colspan="2">Title</td></tr>';
                 $('table.flatTable').append(inside);
                 var i;
