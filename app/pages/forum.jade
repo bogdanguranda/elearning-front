@@ -46,6 +46,28 @@ block javascript
                     $('#modalAddTopic').modal('show');
                 });
 
+                $("#buttonAddThread").on("click", function () {
+                    var threadTitle = $(".input-xlarge.title").val();
+                    var dataToSend = {title: threadTitle, topic: topicTitle, owner: sessionStorage.currentUser};
+
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': sessionStorage.accessToken
+                        },
+                        'type': 'POST',
+                        'url': 'http://localhost:8080/threads',
+                        'data': JSON.stringify(dataToSend),
+                        'dataType': 'text',
+                        'success': function () {
+                            var inside = "";
+                            inside += '<tr><td><a onclick="openThread(\'' + dataToSend.topic + '\', \'' + dataToSend.title + '\')">'
+                                    + dataToSend.title + '</a></td><td>' + dataToSend.owner + '</td></tr>';
+                            $('table.flatTable').append(inside);
+                        }
+                    });
+                });
+
                 $.getJSON(url, sessionStorage.accessToken, function (data, status) {
                     var i;
                     for (i = 0; i < data.length; i++) {
@@ -71,6 +93,31 @@ block javascript
 
                 $("#addCommentButton").on("click", function () {
                     $('#modalAddComment').modal('show');
+                });
+
+                $("#buttonAddComment").on("click", function () {
+                    var comment = $(".textarea.comment").val();
+                    var dataToSend = {
+                        id: null, owner: sessionStorage.currentUser, topic: topicTitle, thread: threadTitle,
+                        message: comment, timeStamp: null
+                    };
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': sessionStorage.accessToken
+                        },
+                        'type': 'POST',
+                        'url': 'http://localhost:8080/comments',
+                        'data': JSON.stringify(dataToSend),
+                        'dataType': 'text',
+                        'success': function () {
+                            var inside = "";
+                            dataToSend.timeStamp = moment(new Date()).format('YYYY-MM-DD HH:mm');
+                            inside += '<tr><td>' + dataToSend.owner + '</td><td>' + dataToSend.message + '</td><td>'
+                                    + dataToSend.timeStamp + '</td></tr>';
+                            $('table.flatTable').append(inside);
+                        }
+                    });
                 });
 
                 $.getJSON(url, sessionStorage.accessToken, function (data, status) {
