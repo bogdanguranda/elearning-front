@@ -1,0 +1,28 @@
+div(class="header")
+div(class="scroll")
+ul(id="navigation")
+    li(class="home")
+        a(href="cursuri.html", title="Home")
+    li(class="chat")
+        a(href="chat.html", title="Chat")
+    li(class="forum")
+        a(href="forum.html", title="Forum")
+    li(class="about")
+        a(href="about.htmls", title="About")
+
+block javascript
+    script(src="assets/js/main.js")
+    script(type="text/javascript").
+        $(function() {
+            $('#navigation a').stop().animate({'marginLeft':'-85px'},1000);
+
+            $('#navigation > li').hover(
+                function () {
+                    $('a',$(this)).stop().animate({'marginLeft':'-2px'},200);
+                },
+                function () {
+                    $('a',$(this)).stop().animate({'marginLeft':'-85px'},200);
+                }
+            );
+        });
+
