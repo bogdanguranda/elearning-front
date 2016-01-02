@@ -78,17 +78,17 @@ block javascript
                     var th = document.getElementById("id01");
                     $(".container.container-second").empty();
                     $(".container.container-second").append(th);
-                    var enroll_button = '<button type="button" class="btn btn-success btn-change-role"> Enroll to course </button>';
-                    var remove_button = '<button type="button" class="btn btn-success btn-change-role"> Remove </button>';
+                    var enroll_button = '<button type="button" class="btn btn-enroll"> Enroll to course </button>';
+                    var remove_button = '<button type="button" class="btn btn-remove-course"> Remove </button>';
                     for (i = 0; i < data.length; i++) {
                         row[i] = $("<div></div>").attr("class", "row row-content");
                         $("#id01").after(row[i]);
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
-                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">' + data[i].details + '</div>';
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + enroll_button + '</div>';
-                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
-                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + remove_button + '</div>';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + data[i].title + '</h5></div>';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + data[i].about + '</h5></div>';
+                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><h5>' + data[i].details + '</h5></div>';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + enroll_button + '</h5></div>';
+                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + data[i].owner + '</h5></div>';
+                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + remove_button + '</h5></div>';
                         $(row[i]).append(inside);
                         inside = "";
                     }
