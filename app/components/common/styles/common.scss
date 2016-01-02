@@ -1,100 +1,71 @@
- body {
-    
-	background: #9acd32;
-	background: linear-gradient(to right, #8bceec, #9acd50);
-    
-    font-family: Copperplate / Copperplate Gothic Light, sans-serif;
+body {
+  background: #9acd32;
+  background: linear-gradient(to right, #8bceec, #9acd50);
+
+  font-family: Copperplate / Copperplate Gothic Light, sans-serif;
 }
+
 .background_image {
-	background: url('..\\images\\tree.png') no-repeat;
-	background-size: contain;
-	background-position: center;
-	position: fixed;
-    padding:0;
-    margin:0;
+  background: url('../images/tree.png') no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: fixed;
+  padding: 0;
+  margin: 0;
 
-    top:0;
-    left:0;
+  top: 0;
+  left: 0;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
+
 .overlay {
-	background: #9acd32;
-	background: linear-gradient(to right, #8bceec, #9acd50);
+  background: #9acd32;
+  background: linear-gradient(to right, #8bceec, #9acd50);
 }
 
 html {
-	background: #9acd32;
-	background: linear-gradient(to right, #8bceec, #9acd50);
+  background: #9acd32;
+  background: linear-gradient(to right, #8bceec, #9acd50);
 }
 
-h1{
-	margin-left:98px;
+h1 {
+  margin-left: 98px;
 }
 
-
-label{
-	color:black !important;
-	font-size:14px !important;
-	padding-left:0 !important;
-}
-
-.container{
-	//margin-top:10px;
+label {
+  color: black !important;
+  font-size: 14px !important;
+  padding-left: 0 !important;
 }
 
 .title1 {
-
-	display: inline;
-
-	position: relative;
-
-	font: 100px Helvetica, Sans-Serif;
-
-	letter-spacing: -5px;
-
-	color: #8bceec; 
-
-	margin-left: 5%;
+  display: inline;
+  position: relative;
+  font-size: 70px;
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: -3px;
+  color: #633245;
+  margin-left: 5%;
 }
-
-
-
-.title1:after {
-
-	content: "Elearning";
-
-	position: absolute; left: 8px; top: 5px;
-
-	color: #9acd50;   
-
-}
-
 
 .title2 {
-
-	display: inline;
-
-	position: relative;
-
-	font: 80px Helvetica, Sans-Serif;
-
-	letter-spacing: -5px;
-
-	color: #8bceec; 
-
-	margin-left: 40%;
+  display: inline;
+  position: relative;
+  font-size: 70px;
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: -3px;
+  color: #633245;
+  margin-left: 35%;
 }
 
-
-
-.title2:after {
-
-	content: "Application";
-
-	position: absolute; left: 8px; top: 3px;
-
-	color: #9acd50;   
-
+.signup {
+  display: inline;
+  position: relative;
+  font-size: 70px;
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: -3px;
+  color: #633245;
+  margin-left: 5%;
 }
