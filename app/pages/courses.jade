@@ -4,16 +4,16 @@ block content
     include ../components/courses/courses.jade
 block javascript
     script(type="text/javascript").
-        $(function () {
-            $(".profile-nume").text("Nume: " + sessionStorage.username);
+        $(document).ready(function () {
+            loadAJAX();
+            $(".profile-nume").text("Nume: " + sessionStorage.currentUser);
             $(".profile-status").text("Status: " + sessionStorage.role);
             if (sessionStorage.role == "student") {
                 $("#btn-curs-nou").addClass('hide');
             }
-            $("#btn-refresh").on("click", function () {
-                $("#btn-refresh").text("Refresh Cursuri");
-                loadAJAX();
-            });
+            // $("#btn-refresh").on("click", function () {
+            //     $("#btn-refresh").text("Refresh Cursuri");
+            // });
             $("#btn-curs-nou").on("click", function () {
                 showPopup();
             });
@@ -48,9 +48,9 @@ block javascript
                         function (data, status) {
                             console.log("Data: " + data + "\nStatus: " + status);
                         });
+                setTimeout(loadAJAX(), 3000);
             });
             function showPopup() {
-                console.log("intra in functie showPopup");
                 $('#modal_id').modal('show');
             }
 
@@ -78,13 +78,17 @@ block javascript
                     var th = document.getElementById("id01");
                     $(".container.container-second").empty();
                     $(".container.container-second").append(th);
+                    var enroll_button = '<button type="button" class="btn btn-success btn-change-role"> Enroll to course </button>';
+                    var remove_button = '<button type="button" class="btn btn-success btn-change-role"> Remove </button>';
                     for (i = 0; i < data.length; i++) {
                         row[i] = $("<div></div>").attr("class", "row row-content");
                         $("#id01").after(row[i]);
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
-                        inside += '<div class="col-xs-7 col-sm-7 col-md-5 col-lg-7">' + data[i].details + '</div>';
+                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">' + data[i].details + '</div>';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + enroll_button + '</div>';
                         inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
+                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + remove_button + '</div>';
                         $(row[i]).append(inside);
                         inside = "";
                     }
