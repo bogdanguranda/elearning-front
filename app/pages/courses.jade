@@ -6,14 +6,12 @@ block javascript
     script(type="text/javascript").
         $(document).ready(function () {
             loadAJAX();
-            $(".profile-nume").text("Nume: " + sessionStorage.currentUser);
-            $(".profile-status").text("Status: " + sessionStorage.role);
+            $(".profile-nume").text("Name: " + sessionStorage.currentUser);
+            $(".profile-status").text("Role: " + sessionStorage.role);
             if (sessionStorage.role == "student") {
                 $("#btn-curs-nou").addClass('hide');
             }
-            // $("#btn-refresh").on("click", function () {
-            //     $("#btn-refresh").text("Refresh Cursuri");
-            // });
+
             $("#btn-curs-nou").on("click", function () {
                 showPopup();
             });
