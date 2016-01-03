@@ -81,13 +81,19 @@ block javascript
                     for (i = 0; i < data.length; i++) {
                         row[i] = $("<div></div>").attr("class", "row row-content");
                         $("#id01").after(row[i]);
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].title + '</div>';
+                        inside += '<div id="courseTitle" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="cursor: pointer;">' + data[i].title + '</div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' + data[i].about + '</div>';
                         inside += '<div class="col-xs-7 col-sm-7 col-md-5 col-lg-7">' + data[i].details + '</div>';
                         inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">' + data[i].owner + '</div>';
                         $(row[i]).append(inside);
                         inside = "";
                     }
+
+                    $("#courseTitle").on("click", function () {
+                        sessionStorage.setItem("currentCourse", $('#courseTitle').text());
+                        window.location.href = 'coursemodules.html';
+                    });
+
                     console.log(status);
                 });
             }

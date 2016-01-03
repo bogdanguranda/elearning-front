@@ -2,8 +2,7 @@ block content
     include ../components/coursemodules/coursemodules.jade
 block javascript
     script(type="text/javascript").
-        //this is hardcoded for the moment
-        var currentCourseTitle = 'CS Course';
+        var currentCourseTitle = sessionStorage.currentCourse;
         
         $(function () {
             $.getJSON = function (url, callback) {
