@@ -1,14 +1,7 @@
-
 extends ../components/common/page.jade
-block content
-	include ../components/common/navbar.jade
-	//h1 Forum
-	div(class="logo")
-	div(class="forum-block")
-		textarea(name="Message" id="message" placeholder="Post here...")
-		button(id = "post" class="btn-post", type="submit") Post
-		p ABC
 
+block content
+    include ../components/common/navbar.jade
 block javascript
     script(type="text/javascript").
         $(function () {
