@@ -41,12 +41,12 @@ block javascript
                 table.innerHTML = '';
 
                 var inside = '<tr class="titleTr"><td class="titleTd">Threads</td>' +
-                        '<td style="cursor: pointer;" id="addTopicButton" class="plusTd"></tr>';
+                        '<td style="cursor: pointer;" id="addThreadButton" class="plusTd"></tr>';
                 inside += '<tr class="headingTr"><td>Title</td><td>Owner</td></tr>';
                 $('table.flatTable').append(inside);
 
-                $("#addTopicButton").on("click", function () {
-                    $('#modalAddTopic').modal('show');
+                $("#addThreadButton").on("click", function () {
+                    $('#modalAddThread').modal('show');
                 });
 
                 $("#buttonAddThread").on("click", function () {
