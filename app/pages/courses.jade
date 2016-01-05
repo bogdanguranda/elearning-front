@@ -48,12 +48,11 @@ block javascript
                         function (data, status) {
                             console.log("Data: " + data + "\nStatus: " + status);
                         });
-                setTimeout(loadAJAX(), 3000);
+                loadAJAX();
             });
             function showPopup() {
                 $('#modal_id').modal('show');
             }
-
             function loadAJAX() {
                 $.getJSON = function (url, token, callback) {
                     return jQuery.ajax({
@@ -70,7 +69,6 @@ block javascript
                         }
                     });
                 };
-
                 $.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
                     var inside = "";
                     var i;
@@ -88,11 +86,18 @@ block javascript
                         inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><h5>' + data[i].details + '</h5></div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + enroll_button + '</h5></div>';
                         inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + data[i].owner + '</h5></div>';
-                        inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + remove_button + '</h5></div>';
+                        if(data[i].owner == sessionStorage.currentUser){
+                            inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + remove_button + '</h5></div>';   
+                        }else{
+                            inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5></h5></div>';
+                        }
                         $(row[i]).append(inside);
                         inside = "";
                     }
                     console.log(status);
                 });
+            }
+            $(".btn.btn-enroll").on("click", function (){
+
             }
         });

@@ -1,13 +1,13 @@
-h1 Cursuri
+h1 Courses
 br
 div(class="container container-first")
     div(class="row")
         div(id="btns-cursuri", class="col-xs-10 col-sm-10 col-md-10 col-lg-10")
             //button(id="btn-refresh" type="button" class="btn btn-success dropdown-toggle get-cursuri") Fetch Cursuri
-            button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Curs Nou
+            button(id="btn-curs-nou" type="button" class="btn btn-default dropdown-toggle curs-nou") Add New Course
         div(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right" style="background-color:gray;")
             h3 Profile
-            span(class="profile-nume") Nume:
+            span(class="profile-nume") Name:
             br
             span(class="profile-status") Status:
 br
@@ -29,7 +29,7 @@ div(class="modal fade modal-danger", id="modal_id", tabindex="-1", role="dialog"
     div(class="modal-dialog")
         div(class="modal-content")
             div(class="modal-header")
-                h4 Adauga Curs
+                h4 Add Course
             div(class="modal-body")
                 form(class="curs-nou" name="curs-nou")
                     label(class="label" for="owner") Author
@@ -48,7 +48,7 @@ div(class="modal fade modal-danger", id="modal_id", tabindex="-1", role="dialog"
                     //h4(class="col-sm-4 modal-about")
                     label(class="label" for="details") Details
                     br
-                    textarea(class="textarea details" name="details" rows="4" cols="50")  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    textarea(class="textarea details" name="details" rows="4" cols="50" placeholder="Enter description here.")
             div(class="modal-footer")
-                button(type="button", class="btn btn-danger", data-dismiss="modal") Anuleaza
-                button(id="btn-adauga", type="submit", class="btn btn-success", value="Adauga", data-dismiss="modal") Adauga
+                button(type="button", class="btn btn-danger", data-dismiss="modal") Cancel
+                button(id="btn-adauga", type="submit", class="btn btn-success", value="Adauga", data-dismiss="modal") Add Course
