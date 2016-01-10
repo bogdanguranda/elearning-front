@@ -27,17 +27,14 @@ block javascript
             var table = document.getElementsByClassName("tableModules")[0];
             table.innerHTML = '';
 
-            var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">'+ moduleTitle + '</td>' +
+            var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">'+ courseTitle + ' - ' + moduleTitle + '</td>' +
                     '<td style="cursor: pointer;" id="addFileButton" class="addFileTd"></td></tr>';
-            inside += '<tr class="headingTr"><td>Title</td><td>Course</td><td>Description</td></tr>';
-            $('table.tableModules').append(inside);
+            $('table.tableModules:first').append(inside);
 
             $.getJSON(url, function (data, status) {
-                inside = "";
-                inside += '<tr><td>' + data.title + '</td><td>' + data.course + '</td><td>'+ data.description +'</td></tr>';
-                $('table.tableModules').append(inside);
-                inside = '<tr class="titleTr"><td colspan="3" class="titleTd">'+ 'Files for this module' + '</td>' +'</tr>';
-            	$('table.tableModules').append(inside);
+                $('.moduleContent').append('<div>'+ data.description +'</div>')
+                //- inside = '<tr class="titleTr"><td colspan="3" class="titleTd">'+ 'Files for this module' + '</td>' +'</tr>';
+            	$('table.tableModules:last').append('<tr class="titleTr"><td colspan="3" class="titleTd">'+ 'Files for this module');
                 $("#addFileButton").on("click", function () {
                     alert("A new file will be added to this module. Not implemented yet!");
                 });
