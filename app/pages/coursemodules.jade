@@ -91,24 +91,7 @@ block javascript
         populateModulesTable();
 
         this.openModule = function (moduleTitle) {
-            var url = "http://localhost:8080/courses/" +  encodeURIComponent(currentCourseTitle) + "/modules/" + encodeURIComponent(moduleTitle);
-
-            var table = document.getElementsByClassName("flatTable")[0];
-            table.innerHTML = '';
-
-            var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">'+ moduleTitle + '</td>' +
-                    '<td style="cursor: pointer;" id="addFileButton" class="addFileTd"></td></tr>';
-            inside += '<tr class="headingTr"><td>Title</td><td>Course</td><td>Description</td></tr>';
-            $('table.flatTable').append(inside);
-
-            $.getJSON(url, function (data, status) {
-                inside = "";
-                inside += '<tr><td>' + data.title + '</td><td>' + data.course + '</td><td>'+ data.description +'</td></tr>';
-                $('table.flatTable').append(inside);
-                
-                $("#addFileButton").on("click", function () {
-                    alert("A new file will be added to this module. Not implemented yet!");
-                });
-            });
+            sessionStorage.setItem("currentModule", moduleTitle);
+            window.location.href = 'module.html';
         };
         });
