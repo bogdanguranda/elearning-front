@@ -34,7 +34,7 @@ block javascript
                         $('table.flatTable').append(inside);
                     }
 
-                    if (sessionStorage.role == 'professor' && sessionStorage.currentUser == 'username4') {
+                    if (sessionStorage.role == 'professor') {
                         $("#addModuleButton").on("click", function () {
                             $('#modalAddModule').modal('show');
                         });
@@ -49,6 +49,7 @@ block javascript
                                 'dataType': 'text',
                                 'url': 'http://localhost:8080/courses/' + encodeURIComponent(currentCourseTitle) + '/modules?moduleTitle=' + encodeURIComponent(moduleTitle),
                                 'success': function () {
+                                    $('table.flatTable tr').remove();
                                     populateModulesTable();
                                 }
                             });
