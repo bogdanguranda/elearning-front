@@ -1,6 +1,8 @@
 div(class="header")
 div(class="scroll")
 ul(id="navigation")
+    li
+        input(type="submit" class="logout-button" value="Log out")
     li(class="home")
         a(href="courses.html", title="Home")
     li(class="chat")
@@ -10,4 +12,21 @@ ul(id="navigation")
 
 block javascript
     script(src="assets/js/main.js")
-
+    script(type="text/javascript").
+        $(document).ready(function () {
+            $(".logout-button").on("click", function () {
+                $.ajax({
+                    url: "http://localhost:8080/logout",
+                    type: "GET",
+                    dataType: "text",
+                    headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
+                    success: function (data, textStatus, jqXHR) {
+                        sessionStorage.clear();
+                        window.location.href = 'login.html';
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Error: ' + errorThrown);
+                    }
+                });
+            });
+        });
