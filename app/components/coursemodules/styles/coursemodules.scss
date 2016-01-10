@@ -1,7 +1,53 @@
-.flatTable .deleteTd {
+.tableCourseModules .deleteTd {
   background: url('../images/editing-delete-icon.png') center center no-repeat, rgba(0, 0, 0, 0.1);
 }
 
-.flatTable .addFileTd {
+.tableCourseModules .addFileTd {
   background: url('../images/add-file-icon.png') center center no-repeat, rgba(0, 0, 0, 0.1);
+}
+
+.tableCourseModules {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  font-weight: bold;
+  color: #d4d1d5 ;
+}
+
+.tableCourseModules tr {
+  height: 50px;
+  background: #CCFF00;
+  border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
+}
+
+.tableCourseModules td {
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+
+.tableCourseModules .titleTr {
+  height: 70px;
+  color: #f6f3f7;
+  background: #FF9900;
+  border: 0px solid;
+  text-align: center;
+}
+
+.tableCourseModules .plusTd {
+  background: url(http://i.imgur.com/3hSkhay.png) center center no-repeat, rgba(0, 0, 0, 0.1);
+}
+
+.tableCourseModules .controlTd {
+  position: relative;
+  width: 80px;
+  background: url(http://i.imgur.com/9Q5f6cv.png) center center no-repeat;
+  cursor: pointer;
+}
+
+.tableCourseModules .headingTr {
+  height: 30px;
+  background: #63acb7;
+  color: #f6f3f7;
+  font-size: 8pt;
+  border: 0px solid;
 }

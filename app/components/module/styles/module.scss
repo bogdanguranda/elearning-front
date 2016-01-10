@@ -1,7 +1,52 @@
-.flatTable .deleteTd {
+.tableModules .deleteTd {
   background: url('../images/editing-delete-icon.png') center center no-repeat, rgba(0, 0, 0, 0.1);
 }
 
-.flatTable .addFileTd {
+.tableModules .addFileTd {
   background: url('../images/add-file-icon.png') center center no-repeat, rgba(0, 0, 0, 0.1);
+}
+
+.tableModules {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  font-weight: bold;
+  color: #d4d1d5 ;
+}
+
+.tableModules tr {
+  height: 50px;
+  background: #006600;
+  border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
+}
+
+.tableModules td {
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+
+.tableModules .titleTr {
+  height: 70px;
+  color: #f6f3f7;
+  background: #006666;
+  border: 0px solid;
+}
+
+.tableModules .plusTd {
+  background: url(http://i.imgur.com/3hSkhay.png) center center no-repeat, rgba(0, 0, 0, 0.1);
+}
+
+.tableModules .controlTd {
+  position: relative;
+  width: 80px;
+  background: url(http://i.imgur.com/9Q5f6cv.png) center center no-repeat;
+  cursor: pointer;
+}
+
+.tableModules .headingTr {
+  height: 30px;
+  background: #63acb7;
+  color: #f6f3f7;
+  font-size: 8pt;
+  border: 0px solid;
 }

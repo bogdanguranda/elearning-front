@@ -24,21 +24,21 @@ block javascript
             function populateModulesTable() {
                 var url = "http://localhost:8080/courses/" + encodeURIComponent(currentCourseTitle) + "/modules";
                 $.getJSON(url, function (data, status) {
-                    var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">Course Modules</td><td style="cursor: pointer;" id="addModuleButton" class="plusTd"></td></tr>';
-                    inside += '<tr class="headingTr"><td colspan="3">Title</td></tr>';
-                    $('table.flatTable').append(inside);
+                    var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">' + currentCourseTitle +'</td><td style="cursor: pointer;" id="addModuleButton" class="plusTd"></td></tr>';
+                    inside += '<tr class="headingTr"><td colspan="3">Modules for this course</td></tr>';
+                    $('table.tableCourseModules').append(inside);
                     var i;
                     for (i = 0; i < data.length; i++) {
                         inside = "";
                         inside += '<tr><td colspan="2"><a onclick="openModule(\'' + data[i].title + '\')">' + data[i].title + '</a></td><td style="cursor: pointer;" id="deleteModuleButton" class="deleteTd"></td></tr>';
-                        $('table.flatTable').append(inside);
+                        $('table.tableCourseModules').append(inside);
                     }
 
                     if (sessionStorage.role == 'professor') {
                         $("#addModuleButton").on("click", function () {
                             $('#modalAddModule').modal('show');
                         });
-                        $("table.flatTable").on("click", "#deleteModuleButton", function () {
+                        $("table.tableCourseModules").on("click", "#deleteModuleButton", function () {
                             var moduleTitle = $(this).closest('tr').children('td').text();
                             return jQuery.ajax({
                                 headers: {
@@ -49,7 +49,7 @@ block javascript
                                 'dataType': 'text',
                                 'url': 'http://localhost:8080/courses/' + encodeURIComponent(currentCourseTitle) + '/modules?moduleTitle=' + encodeURIComponent(moduleTitle),
                                 'success': function () {
-                                    $('table.flatTable tr').remove();
+                                    $('table.tableCourseModules tr').remove();
                                     populateModulesTable();
                                 }
                             });
@@ -76,7 +76,7 @@ block javascript
                                     var inside = "";
                                     inside += '<tr><td colspan="2"><a onclick="openModule(\'' + dataToSend.title + '\')">'
                                             + dataToSend.title + '</a></td><td style="cursor: pointer;" id="deleteModuleButton" class="deleteTd"></td></tr>';
-                                    $('table.flatTable').append(inside);
+                                    $('table.tableCourseModules').append(inside);
                                 }
                             });
                         });
