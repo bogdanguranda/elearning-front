@@ -31,8 +31,7 @@ block javascript
                     success: function (data, textStatus, jqXHR) {
                         var parsedData = JSON.parse(data);
                         sessionStorage.setItem("accessToken", parsedData.token);
-                        parsedData.role=="profesor" ? sessionStorage.setItem("role", "professor") : sessionStorage.setItem("role", parsedData.role);
-                        //sessionStorage.setItem("role", parsedData.role);
+                        sessionStorage.setItem("role", parsedData.role);
                         sessionStorage.setItem("currentUser", $('#username').val().toString());
                         sessionStorage.role=="administrator" ? window.location.href = 'administrator.html' : window.location.href = 'courses.html';
                     },
