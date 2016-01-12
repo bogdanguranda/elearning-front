@@ -23,7 +23,7 @@ block javascript
 										'<select class="form-control">' + 
 											'<option disabled selected> -- select an option -- </option>' +
 											'<option value="student">Student</option>' +
-											'<option value="profesor">Professor</option>' +
+											'<option value="professor">Professor</option>' +
 										'</select>' +
 									'</div>';
 					for(i = 0; i < users.length; i++) {
@@ -41,9 +41,7 @@ block javascript
 						//Select the parent form and submit
 						user = $(this).closest('form').find('[name="accountUsername"]').text();
 						role = $(this).closest("form").find(":selected").val();
-						console.log("role_i: ",role);
 						submit_out();
-						console.log("role_d: ", role);
 					});
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
@@ -68,7 +66,6 @@ block javascript
 					accountUsername: user,
 					newAccountType: role
 				};
-				//console.log("role: ",role);
 				$.postJSON(
 					"http://localhost:8080/admin/changeAccountType",
 					dataToSend,
