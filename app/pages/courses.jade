@@ -6,6 +6,19 @@ block javascript
     script(type="text/javascript").
         $(document).ready(function () {
             loadAJAX();
+            $.postJSON = function (url, data, token, callback) {
+                return jQuery.ajax({
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': token
+                    },
+                    'type': 'POST',
+                    'url': url,
+                    'data': JSON.stringify(data),
+                    'dataType': 'text',
+                    'success': callback
+                });
+            };
             $(".profile-nume").text("Nume: " + sessionStorage.currentUser);
             $(".profile-status").text("Status: " + sessionStorage.role);
             if (sessionStorage.role == "student") {
@@ -18,19 +31,19 @@ block javascript
                 showPopup();
             });
             $("#btn-adauga").on("click", function () {
-                $.postJSON = function (url, data, token, callback) {
-                    return jQuery.ajax({
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'token': token
-                        },
-                        'type': 'POST',
-                        'url': url,
-                        'data': JSON.stringify(data),
-                        'dataType': 'text',
-                        'success': callback
-                    });
-                };
+                // $.postJSON = function (url, data, token, callback) {
+                //     return jQuery.ajax({
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             'token': token
+                //         },
+                //         'type': 'POST',
+                //         'url': url,
+                //         'data': JSON.stringify(data),
+                //         'dataType': 'text',
+                //         'success': callback
+                //     });
+                // };
                 var titleToSend = $(".input-xlarge.title").val();
                 var aboutToSend = $(".input-xlarge.about").val();
                 var detailsToSend = $(".textarea.details").val();
@@ -71,7 +84,7 @@ block javascript
                 };
                 $.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
                     var inside = "";
-                    var i;
+                    var i, sel = 0;
                     var row = [];
                     var th = document.getElementById("id01");
                     $(".container.container-second").empty();
@@ -81,23 +94,99 @@ block javascript
                     for (i = 0; i < data.length; i++) {
                         row[i] = $("<div></div>").attr("class", "row row-content");
                         $("#id01").after(row[i]);
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + data[i].title + '</h5></div>';
+                        inside += '<form id="myForm'+sel+'">';
+                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5 name="titlu">' + data[i].title + '</h5></div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + data[i].about + '</h5></div>';
                         inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><h5>' + data[i].details + '</h5></div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + enroll_button + '</h5></div>';
                         inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + data[i].owner + '</h5></div>';
                         if(data[i].owner == sessionStorage.currentUser){
-                            inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + remove_button + '</h5></div>';   
+                            inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5>' + remove_button + '</h5></div>';
                         }else{
                             inside += '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><h5></h5></div>';
                         }
+                        inside +='</form>';
                         $(row[i]).append(inside);
                         inside = "";
                     }
-                    console.log(status);
+                    $(".btn.btn-enroll").on("click", function (){
+                        //enroll stuff
+                        titlu = $(this).closest('form').find('[name="titlu"]').text();
+                        if ($(this).text()==="Enroll to course"){
+                            console.log("enroll off");
+                            $(this).text("Unenroll to course");
+                            submit_enroll(titlu);
+                        }else{
+                            console.log("enroll on");
+                            $(this).text("Enroll to course");
+                            //submit_unenroll(titlu);
+                        }
+                        
+                        //$(this).closest('form').find(".btn.btn-enroll").removeClass(".btn-enroll");
+                        //$(this).closest('form').find(".btn").addClass("btn-unenroll").html("Unenroll to course");
+                    });
                 });
             }
-            $(".btn.btn-enroll").on("click", function (){
-
+            // $.pJSON = function (url, data, token, callback) {
+            //     return jQuery.ajax({
+            //         headers: {
+            //             'Content-Type': 'application/x-www-form-urlencoded',
+            //             'token': token,
+            //             'type': 'POST',
+            //             'url': url,
+            //             'data': JSON.stringify(data),
+            //             'dataType': 'text',
+            //             'success': callback
+            //         },
+            //     });
+            // };
+            $.poJSON = function (url, token, title, user, callback) {
+                return jQuery.ajax({
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'token': token
+                    },
+                    'type': 'POST',
+                    'url': url,
+                    //'data': JSON.stringify(data),
+                    'title': JSON.stringify(title),
+                    'username': JSON.stringify(user),
+                    'dataType': 'text',
+                    'success': callback
+                });
+            };
+            function submit_enroll(titlu){
+                var dataToSend = {
+                    title: titlu,
+                    username: sessionStorage.currentUser
+                };
+                console.log("dataToSend: ",dataToSend);
+                $.poJSON(
+                    "http://localhost:8080/courses/enroll",
+                    //dataToSend,
+                    sessionStorage.accessToken,
+                    titlu,
+                    sessionStorage.currentUser,
+                    function (data, status) {
+                        console.log("Data: " + data + "\nStatus: " + status);
+                    }
+                 );
+            }
+            function submit_unenroll(titlu){
+                var dataToSend = {
+                    title: titlu,
+                    username: sessionStorage.currentUser
+                };
+                console.log("dataToSend: ",dataToSend);
+                $.poJSON(
+                    "http://localhost:8080/courses/unenroll",
+                    //dataToSend,
+                    sessionStorage.accessToken,
+                    titlu,
+                    sessionStorage.currentUser,
+                    function (data, status) {
+                        console.log("Data: " + data + "\nStatus: " + status);
+                    }
+                 );
             }
         });
