@@ -4,7 +4,6 @@ block content
 	include ../components/administrator/administrator_content.jade
 block javascript
 	script(type="text/javascript").
-		console.log("test1");
 		$(document).ready(function(){
 			var user,role;
 			$.ajax({
@@ -18,15 +17,13 @@ block javascript
 					var i,sel=0;
 					var row = [];
 					var th = document.getElementById("table-users");
-					//$(".container.container-users").empty();
 					$(".container.container-users").append(th);
-					var buton = '<button class="btn btn-success btn-change-role" type="submit">Change Role</button>';
+					var buton = '<button class="btn btn-success btn-change-role" type="button">Change Role</button>';
 					select_list = '<div class="form-group">' + 
 										'<select class="form-control">' + 
 											'<option disabled selected> -- select an option -- </option>' +
 											'<option value="student">Student</option>' +
-											'<option value="profesor">Profesor</option>' +
-											'<option value="administrator">Administrator</option>' +
+											'<option value="profesor">Professor</option>' +
 										'</select>' +
 									'</div>';
 					for(i = 0; i < users.length; i++) {
@@ -44,7 +41,9 @@ block javascript
 						//Select the parent form and submit
 						user = $(this).closest('form').find('[name="accountUsername"]').text();
 						role = $(this).closest("form").find(":selected").val();
+						console.log("role_i: ",role);
 						submit_out();
+						console.log("role_d: ", role);
 					});
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
@@ -69,6 +68,7 @@ block javascript
 					accountUsername: user,
 					newAccountType: role
 				};
+				//console.log("role: ",role);
 				$.postJSON(
 					"http://localhost:8080/admin/changeAccountType",
 					dataToSend,
@@ -76,8 +76,9 @@ block javascript
 					function (data, status) {
 						console.log("Data: " + data + "\nStatus: " + status);
 					}
-				 );
+				);
 				user="";
 				role="";
+				location.reload();
 			}
 		});
