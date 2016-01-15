@@ -1,0 +1,20 @@
+link(href="assets/css/main.css", rel="stylesheet", id="main-css")
+script(src="assets/js/main.js")
+table.tableCourseModules
+div(class="modal fade modal-danger", id="modalAddModule", tabindex="-1", role="dialog", aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                h4 New module
+            div(class="modal-body")
+                form(class="new-module" name="new-module")
+                    label(class="label" for="title") Title
+                    br
+                    input(type="text" name="title" class="input-xlarge title")
+                    br
+                    label(class="label" for="description") Description
+                    br
+                    textarea(class="textarea moduleDescription" name="description" rows="4" cols="50")
+            div(class="modal-footer")
+                button(type="button", class="btn btn-danger", data-dismiss="modal") Cancel
+                button(id="buttonAddModule", type="submit", class="btn btn-success", value="Ok", data-dismiss="modal") Ok
