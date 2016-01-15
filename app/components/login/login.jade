@@ -11,7 +11,7 @@ block content
             span Don't have an account?
             br
             span Click
-                a(href="signup.html") here
+                a(href="signup.html")  here
             span  to register!
 block javascript
     script(src="assets/js/main.js")
@@ -23,7 +23,7 @@ block javascript
                     "password": $('#password').val().toString()
                 };
                 $.ajax({
-                    url: "http://localhost:8080/authenticate",
+                    url: "https://localhost:8443/authenticate",
                     type: "POST",
                     dataType: "text",
                     headers: {'Content-Type': 'application/json'},
@@ -33,7 +33,7 @@ block javascript
                         sessionStorage.setItem("accessToken", parsedData.token);
                         sessionStorage.setItem("role", parsedData.role);
                         sessionStorage.setItem("currentUser", $('#username').val().toString());
-                        sessionStorage.role=="administrator" ? window.location.href = 'administrator.html' : window.location.href = 'courses.html';
+                        sessionStorage.role == "administrator" ? window.location.href = 'administrator.html' : window.location.href = 'courses.html';
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         alert('Error: ' + errorThrown);

@@ -71,7 +71,7 @@ block javascript
                     owner: ownerToSend
                 };
                 $.postJSON(
-                        "http://localhost:8080/courses",
+                        "https://localhost:8443/courses",
                         dataToSend,
                         sessionStorage.accessToken,
                         function (data, status) {
@@ -99,7 +99,7 @@ block javascript
                         }
                     });
                 };
-                $.getJSON('http://localhost:8080/courses/' + sessionStorage.currentUser + '/titles', sessionStorage.accessToken, function (data, status) {
+                $.getJSON('https://localhost:8443/courses/' + sessionStorage.currentUser + '/titles', sessionStorage.accessToken, function (data, status) {
                     for (var i = 0; i < data.length; i++) {
                         attendedCourses[i] = data[i];
                     }
@@ -122,7 +122,7 @@ block javascript
                         }
                     });
                 };
-                $.getJSON("http://localhost:8080/courses", sessionStorage.accessToken, function (data, status) {
+                $.getJSON("https://localhost:8443/courses", sessionStorage.accessToken, function (data, status) {
                     var inside = "";
                     var i, sel = 0;
                     var row = [];
@@ -169,7 +169,7 @@ block javascript
                     });
                     $(".btn.btn-remove-course").on("click", function () {
                         titlu = $(this).closest('form').find('[name="title"]').text();
-                        var URL = 'http://localhost:8080/courses?title=' + titlu;
+                        var URL = 'https://localhost:8443/courses?title=' + titlu;
                         //console.log("DELETE course:", data);
                         $.delJSON(
                                 URL,
@@ -191,7 +191,7 @@ block javascript
             function submit_enroll(title) {
                 var dataToSend = 'title=' + title + '&username=' + sessionStorage.currentUser;
                 $.poJSON(
-                        "http://localhost:8080/courses/enroll",
+                        "https://localhost:8443/courses/enroll",
                         sessionStorage.accessToken,
                         dataToSend,
                         function (data, status) {
@@ -204,7 +204,7 @@ block javascript
             function submit_unenroll(title) {
                 var dataToSend = 'title=' + title + '&username=' + sessionStorage.currentUser;
                 $.poJSON(
-                        "http://localhost:8080/courses/unenroll",
+                        "https://localhost:8443/courses/unenroll",
                         sessionStorage.accessToken,
                         dataToSend,
                         function (data, status) {

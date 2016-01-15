@@ -7,7 +7,7 @@ block javascript
         $(document).ready(function () {
             var user, role;
             $.ajax({
-                url: "http://localhost:8080/users",
+                url: "https://localhost:8443/users",
                 type: "GET",
                 dataType: "text",
                 headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
@@ -68,7 +68,7 @@ block javascript
                     newAccountType: role
                 };
                 $.postJSON(
-                        "http://localhost:8080/admin/changeAccountType",
+                        "https://localhost:8443/admin/changeAccountType",
                         dataToSend,
                         sessionStorage.accessToken,
                         function (data, status) {

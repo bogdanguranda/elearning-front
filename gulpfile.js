@@ -140,7 +140,7 @@ gulp.task('server', function (done) {
     var basePath = 'public';
     /* Serves main page */
     app.get("/", function (req, res) {
-        res.sendfile(basePath + '/index.html')
+        res.sendfile(basePath + '/login.html')
     });
 
     /* Serves all the static files */

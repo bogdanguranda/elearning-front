@@ -14,7 +14,7 @@ block javascript
                     "password": $('#password').val().toString()
                 };
                 $.ajax({
-                    url: "http://localhost:8080/users",
+                    url: "https://localhost:8443/users",
                     type: "POST",
                     dataType: "text",
                     headers: {'Content-Type': 'application/json'},

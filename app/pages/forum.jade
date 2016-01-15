@@ -22,7 +22,7 @@ block javascript
                 });
             };
 
-            $.getJSON("http://localhost:8080/topics", sessionStorage.accessToken, function (data, status) {
+            $.getJSON("https://localhost:8443/topics", sessionStorage.accessToken, function (data, status) {
                 var inside = '<tr class="titleTr"><td class="titleTd">Topics</td></tr>';
                 inside += '<tr class="headingTr"><td colspan="2">Title</td></tr>';
                 $('table.flatTable').append(inside);
@@ -35,7 +35,7 @@ block javascript
             });
 
             this.openTopic = function (topicTitle) {
-                var url = "http://localhost:8080/threads/topic/" + encodeURIComponent(topicTitle);
+                var url = "https://localhost:8443/threads/topic/" + encodeURIComponent(topicTitle);
 
                 var table = document.getElementsByClassName("flatTable")[0];
                 table.innerHTML = '';
@@ -59,7 +59,7 @@ block javascript
                             'token': sessionStorage.accessToken
                         },
                         'type': 'POST',
-                        'url': 'http://localhost:8080/threads',
+                        'url': 'https://localhost:8443/threads',
                         'data': JSON.stringify(dataToSend),
                         'dataType': 'text',
                         'success': function () {
@@ -83,7 +83,7 @@ block javascript
             };
 
             this.openThread = function (topicTitle, threadTitle) {
-                var url = "http://localhost:8080/comments/thread?topicTitle=" + encodeURIComponent(topicTitle);
+                var url = "https://localhost:8443/comments/thread?topicTitle=" + encodeURIComponent(topicTitle);
                 url += "&threadTitle=" + encodeURIComponent(threadTitle);
 
                 var table = document.getElementsByClassName("flatTable")[0];
@@ -110,7 +110,7 @@ block javascript
                             'token': sessionStorage.accessToken
                         },
                         'type': 'POST',
-                        'url': 'http://localhost:8080/comments',
+                        'url': 'https://localhost:8443/comments',
                         'data': JSON.stringify(dataToSend),
                         'dataType': 'text',
                         'success': function () {

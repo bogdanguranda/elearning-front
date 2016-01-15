@@ -14,7 +14,7 @@ block javascript
     script(type="text/javascript").
         function getThreadMessages(senderUsername, receiverUsername) {
             $.ajax({
-                url: "http://localhost:8080/messages/" + senderUsername + "/" + receiverUsername,
+                url: "https://localhost:8443/messages/" + senderUsername + "/" + receiverUsername,
                 type: "GET",
                 dataType: "text",
                 headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
@@ -47,7 +47,7 @@ block javascript
         $(document).ready(function () {
 
             $.ajax({
-                url: "http://localhost:8080/users",
+                url: "https://localhost:8443/users",
                 type: "GET",
                 dataType: "text",
                 headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
@@ -83,7 +83,7 @@ block javascript
                     "message": $('.textarea-chat').val()
                 };
                 $.ajax({
-                    url: "http://localhost:8080/messages",
+                    url: "https://localhost:8443/messages",
                     type: "POST",
                     dataType: "text",
                     headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},

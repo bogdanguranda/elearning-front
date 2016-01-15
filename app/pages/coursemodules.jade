@@ -23,7 +23,7 @@ block javascript
             };
 
             function populateModulesTable() {
-                var url = "http://localhost:8080/courses/" + encodeURIComponent(currentCourseTitle) + "/modules";
+                var url = "https://localhost:8443/courses/" + encodeURIComponent(currentCourseTitle) + "/modules";
                 $.getJSON(url, function (data, status) {
                     var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">' + currentCourseTitle + '</td><td style="cursor: pointer;" id="addModuleButton" class="plusTd"></td></tr>';
                     inside += '<tr class="headingTr"><td colspan="3">Modules for this course</td></tr>';
@@ -48,7 +48,7 @@ block javascript
                                 },
                                 'type': 'DELETE',
                                 'dataType': 'text',
-                                'url': 'http://localhost:8080/courses/' + encodeURIComponent(currentCourseTitle) + '/modules?moduleTitle=' + encodeURIComponent(moduleTitle),
+                                'url': 'https://localhost:8443/courses/' + encodeURIComponent(currentCourseTitle) + '/modules?moduleTitle=' + encodeURIComponent(moduleTitle),
                                 'success': function () {
                                     $('table.tableCourseModules tr').remove();
                                     populateModulesTable();
@@ -70,7 +70,7 @@ block javascript
                                     'token': sessionStorage.accessToken
                                 },
                                 'type': 'POST',
-                                'url': 'http://localhost:8080/courses/' + encodeURIComponent(currentCourseTitle) + '/modules',
+                                'url': 'https://localhost:8443/courses/' + encodeURIComponent(currentCourseTitle) + '/modules',
                                 'data': JSON.stringify(dataToSend),
                                 'dataType': 'text',
                                 'success': function () {

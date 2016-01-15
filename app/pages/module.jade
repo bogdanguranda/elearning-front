@@ -23,7 +23,7 @@ block javascript
 
             var moduleTitle = sessionStorage.currentModule;
             var courseTitle = sessionStorage.currentCourse;
-            var url = "http://localhost:8080/courses/" + encodeURIComponent(courseTitle) + "/modules/" + encodeURIComponent(moduleTitle);
+            var url = "https://localhost:8443/courses/" + encodeURIComponent(courseTitle) + "/modules/" + encodeURIComponent(moduleTitle);
 
             var table = document.getElementsByClassName("tableModules")[0];
             table.innerHTML = '';
