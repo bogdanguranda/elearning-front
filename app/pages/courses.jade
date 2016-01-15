@@ -22,15 +22,14 @@ block javascript
                     'success': callback
                 });
             };
-            $.delJSON = function (url, data, token, callback) {
+            $.delJSON = function (url, token, callback) {
                 return jQuery.ajax({
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                         'token': token
                     },
                     'type': 'DELETE',
                     'url': url,
-                    'data': data,
                     'dataType': 'text',
                     'success': callback
                 });
@@ -77,7 +76,7 @@ block javascript
                         function (data, status) {
                             console.log("Data: " + data + "\nStatus: " + status);
                         });
-                loadAJAX();
+                location.reload();
             });
             function showPopup() {
                 $('#modal_id').modal('show');
@@ -155,23 +154,39 @@ block javascript
                     $(".btn.btn-enroll").on("click", function (){
                         //enroll stuff
                         titlu = $(this).closest('form').find('[name="title"]').text();
+                        var dataToSend = 'title='+titlu+'&username='+sessionStorage.currentUser;
                         text_buton= $(this).text();
                         if ( text_buton ==" Enroll to course "){
-                            $(this).text(" Unenroll to course ");
-                            submit_enroll(titlu);
-                        }
-                        if ( text_buton ==" Unenroll to course "){
-                            $(this).text(" Enroll to course ");
-                            submit_unenroll(titlu);
+                            $btn = $(this);
+                            $.poJSON(
+                                "http://localhost:8080/courses/enroll",
+                                sessionStorage.accessToken,
+                                dataToSend,
+                                function (data, status) {
+                                    console.log("Data: " + data + "\nStatus: " + status);
+                                    $btn.text(" Unenroll to course ");
+                                }
+                             );
+                            titlu="";
+                        }else{
+                            $btn = $(this);
+                            $.poJSON(
+                                "http://localhost:8080/courses/unenroll",
+                                sessionStorage.accessToken,
+                                dataToSend,
+                                function (data, status) {
+                                    console.log("Data: " + data + "\nStatus: " + status);
+                                    $btn.text(" Enroll to course ");
+                                }
+                             );
+                            titlu="";
                         }
                     });
                     $(".btn.btn-remove-course").on("click", function (){
                         titlu = $(this).closest('form').find('[name="title"]').text();
-                        data = 'title='+titlu;
-                        //console.log("DELETE course:", data);
+                        var URL = 'http://localhost:8080/courses?title='+titlu;
                         $.delJSON(
-                            "http://localhost:8080/courses",
-                            data,
+                            URL,
                             sessionStorage.accessToken,
                             function (data, status) {
                                 console.log("Data: " + data + "\nStatus: " + status);
@@ -181,29 +196,5 @@ block javascript
                         $(this).closest("form").addClass("hide");
                     });
                 });
-            }
-            function submit_enroll(title){
-                var dataToSend = 'title='+title+'&username='+sessionStorage.currentUser;
-                $.poJSON(
-                    "http://localhost:8080/courses/enroll",
-                    sessionStorage.accessToken,
-                    dataToSend,
-                    function (data, status) {
-                        console.log("Data: " + data + "\nStatus: " + status);
-                    }
-                 );
-                titlu="";
-            }
-            function submit_unenroll(title){
-                var dataToSend = 'title='+title+'&username='+sessionStorage.currentUser;
-                $.poJSON(
-                    "http://localhost:8080/courses/unenroll",
-                    sessionStorage.accessToken,
-                    dataToSend,
-                    function (data, status) {
-                        console.log("Data: " + data + "\nStatus: " + status);
-                    }
-                 );
-                titlu="";
             }
         });
