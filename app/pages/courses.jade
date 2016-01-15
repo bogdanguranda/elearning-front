@@ -134,7 +134,7 @@ block javascript
                         row[i] = $("<div></div>").attr("class", "row row-content");
                         $("#id01").after(row[i]);
                         inside += '<form id="myForm' + sel + '">';
-                        inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5 name="title">' + data[i].title + '</h5></div>';
+                        inside += '<div id="courseTitle" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="cursor: pointer;"><h5>' + data[i].title + '</h5></div>';
                         inside += '<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><h5>' + data[i].about + '</h5></div>';
                         inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><h5>' + data[i].details + '</h5></div>';
                         if (attendedCourses.indexOf(data[i].title) >= 0) {
@@ -178,6 +178,10 @@ block javascript
                         );
                         titlu = "";
                         $(this).closest("form").addClass("hide");
+                    });
+                    $("#courseTitle").on("click", function () {
+                        sessionStorage.setItem("currentCourse", $('#courseTitle').children('h5').text());
+                        window.location.href = 'coursemodules.html';
                     });
                 });
             }
