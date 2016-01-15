@@ -1,81 +1,82 @@
 extends ../components/common/page.jade
 
 block content
-	include ../components/administrator/administrator_content.jade
+    include ../components/administrator/administrator_content.jade
 block javascript
-	script(type="text/javascript").
-		$(document).ready(function(){
-			var user,role;
-			$.ajax({
-				url: "http://localhost:8080/users",
-				type: "GET",
-				dataType: "text",
-				headers: {'Content-Type': 'application/json', 'token':sessionStorage.accessToken},
-				success: function (data, textStatus, jqXHR) {
-					var users = JSON.parse(data);
-					var inside = "";
-					var i,sel=0;
-					var row = [];
-					var th = document.getElementById("table-users");
-					$(".container.container-users").append(th);
-					var buton = '<button class="btn btn-success btn-change-role" type="button">Change Role</button>';
-					select_list = '<div class="form-group">' + 
-										'<select class="form-control">' + 
-											'<option disabled selected> -- select an option -- </option>' +
-											'<option value="student">Student</option>' +
-											'<option value="professor">Professor</option>' +
-										'</select>' +
-									'</div>';
-					for(i = 0; i < users.length; i++) {
-						row[i] = $("<div></div>").attr("class","row row-content");
-						$("#table-users").after(row[i]);
-						inside += '<form id="myForm'+sel+'">';
-						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 "><h5 name="accountUsername">' + users[i].username + '</h5></div>';
-						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">' + select_list + '</div>';
-						inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">' + buton + '</div>';
-						inside += '</form>'
-						$(row[i]).append(inside);
-						inside="";sel++;
-					}
-					$(".btn.btn-success.btn-change-role").on('click', function(){
-						//Select the parent form and submit
-						user = $(this).closest('form').find('[name="accountUsername"]').text();
-						role = $(this).closest("form").find(":selected").val();
-						submit_out();
-					});
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					alert('Error: ' + errorThrown);
-				}
-			});
-			function submit_out(){
-				$.postJSON = function (url, data, token, callback) {
-					return jQuery.ajax({
-						headers: {
-							'Content-Type': 'application/json',
-							'token': token
-						},
-						'type': 'POST',
-						'url': url,
-						'data': JSON.stringify(data),
-						'dataType': 'text',
-						'success': callback
-					});
-				};
-				var dataToSend = {
-					accountUsername: user,
-					newAccountType: role
-				};
-				$.postJSON(
-					"http://localhost:8080/admin/changeAccountType",
-					dataToSend,
-					sessionStorage.accessToken,
-					function (data, status) {
-						console.log("Data: " + data + "\nStatus: " + status);
-					}
-				);
-				user="";
-				role="";
-				location.reload();
-			}
-		});
+    script(type="text/javascript").
+        $(document).ready(function () {
+            var user, role;
+            $.ajax({
+                url: "http://localhost:8080/users",
+                type: "GET",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
+                success: function (data, textStatus, jqXHR) {
+                    var users = JSON.parse(data);
+                    var inside = "";
+                    var i, sel = 0;
+                    var row = [];
+                    var th = document.getElementById("table-users");
+                    $(".container.container-users").append(th);
+                    var buton = '<button class="btn btn-success btn-change-role" type="button">Change Role</button>';
+                    select_list = '<div class="form-group">' +
+                            '<select class="form-control">' +
+                            '<option disabled selected> -- select an option -- </option>' +
+                            '<option value="student">Student</option>' +
+                            '<option value="professor">Professor</option>' +
+                            '</select>' +
+                            '</div>';
+                    for (i = 0; i < users.length; i++) {
+                        row[i] = $("<div></div>").attr("class", "row row-content");
+                        $("#table-users").after(row[i]);
+                        inside += '<form id="myForm' + sel + '">';
+                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 "><h5 name="accountUsername">' + users[i].username + '</h5></div>';
+                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">' + select_list + '</div>';
+                        inside += '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">' + buton + '</div>';
+                        inside += '</form>'
+                        $(row[i]).append(inside);
+                        inside = "";
+                        sel++;
+                    }
+                    $(".btn.btn-success.btn-change-role").on('click', function () {
+                        //Select the parent form and submit
+                        user = $(this).closest('form').find('[name="accountUsername"]').text();
+                        role = $(this).closest("form").find(":selected").val();
+                        submit_out();
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+            });
+            function submit_out() {
+                $.postJSON = function (url, data, token, callback) {
+                    return jQuery.ajax({
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': token
+                        },
+                        'type': 'POST',
+                        'url': url,
+                        'data': JSON.stringify(data),
+                        'dataType': 'text',
+                        'success': callback
+                    });
+                };
+                var dataToSend = {
+                    accountUsername: user,
+                    newAccountType: role
+                };
+                $.postJSON(
+                        "http://localhost:8080/admin/changeAccountType",
+                        dataToSend,
+                        sessionStorage.accessToken,
+                        function (data, status) {
+                            console.log("Data: " + data + "\nStatus: " + status);
+                        }
+                );
+                user = "";
+                role = "";
+                location.reload();
+            }
+        });

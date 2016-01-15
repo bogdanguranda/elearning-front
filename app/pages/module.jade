@@ -1,10 +1,11 @@
 block content
+    include ../components/common/navbar.jade
     include ../components/module/module.jade
 block javascript
     script(type="text/javascript").
         $(document).ready(function () {
-        
-        $.getJSON = function (url, callback) {
+
+            $.getJSON = function (url, callback) {
                 return jQuery.ajax({
                     'headers': {
                         'Content-Type': 'application/json',
@@ -20,21 +21,21 @@ block javascript
                 });
             };
 
-        var moduleTitle = sessionStorage.currentModule;
-        var courseTitle = sessionStorage.currentCourse;
-        var url = "http://localhost:8080/courses/" +  encodeURIComponent(courseTitle) + "/modules/" + encodeURIComponent(moduleTitle);
+            var moduleTitle = sessionStorage.currentModule;
+            var courseTitle = sessionStorage.currentCourse;
+            var url = "http://localhost:8080/courses/" + encodeURIComponent(courseTitle) + "/modules/" + encodeURIComponent(moduleTitle);
 
             var table = document.getElementsByClassName("tableModules")[0];
             table.innerHTML = '';
 
-            var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">'+ courseTitle + ' - ' + moduleTitle + '</td>' +
+            var inside = '<tr class="titleTr"><td colspan="2" class="titleTd">' + courseTitle + ' - ' + moduleTitle + '</td>' +
                     '<td style="cursor: pointer;" id="addFileButton" class="addFileTd"></td></tr>';
             $('table.tableModules:first').append(inside);
 
             $.getJSON(url, function (data, status) {
-                $('.moduleContent').append('<div>'+ data.description +'</div>')
+                $('.moduleContent').append('<div>' + data.description + '</div>')
                 //- inside = '<tr class="titleTr"><td colspan="3" class="titleTd">'+ 'Files for this module' + '</td>' +'</tr>';
-            	$('table.tableModules:last').append('<tr class="titleTr"><td colspan="3" class="titleTd">'+ 'Files for this module');
+                $('table.tableModules:last').append('<tr class="titleTr"><td colspan="3" class="titleTd">' + 'Files for this module');
                 $("#addFileButton").on("click", function () {
                     alert("A new file will be added to this module. Not implemented yet!");
                 });
