@@ -1,123 +1,102 @@
 block content
-    div(id="live-chat")
-        header(class="clearfix")
-            a(href="#", class="chat-close") x
+    div(id="wrapper")
+        div(class="message-container")
+            div(class="message-north")
+                ul(class="message-user-list")
 
-            h4(class="chat-box-name") Ema Barac
+                div(class="message-thread")
 
-            span(class="chat-message-counter") 3
-
-        div(class="chat")
-            
-            div(class="chat-history")
-                
-                div(class="chat-message clearfix")
-                    
-                    img(class="chat-image", src="http://lorempixum.com/32/32/people", alt="", width="32", height="32")
-
-                    div(class="chat-message-content clearfix")
-                        
-                        span(class="chat-time") 13:35
-
-                        h5(class="chat-message-name") Ema Barac
-
-                        p(class="chat-p") Am înteles că un om poate avea totul neavand nimic și nimic având totul.
-                hr(class="chat-hr")
-
-                div(class="chat-message clearfix")
-                    
-                    img(class="chat-image" src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32")
-
-                    div(class="chat-message-content clearfix")
-                        
-                        span(class="chat-time") 13:37
-
-                        h5(class="chat-message-name") Emanuel Barac
-
-                        p(class="chat-p") Întreaga apă din mare nu poate scufunda un vapor, dacă nu pătrunde în interiorul navei. În mod similar negativitatea din lume nu te poate pune jos, decât dacă îi permiți să ajungă în tine.
-
-                hr(class="chat-hr")
-
-                div(class="chat-message clearfix")
-                    
-                    img(class="chat-image" src="http://lorempixum.com/32/32/people" alt="" width="32" height="32")
-
-                    div(class="chat-message-content clearfix")
-                        
-                        span(class="chat-time") 13:38
-
-                        h5(class="chat-message-name") Ema Barac
-
-                        p(class="chat-p") Da, asa este. Cata dreptate ai.
-
-                hr(class="chat-hr")
-
-            p(class="chat-feedback") Your partner is typing…
-
-            form(action="#" method="post")
-
-                fieldset(class="chat-fieldset")
-                    
-                    input(class="chat-input" type="text" placeholder="Type your message…" autofocus)
-                    input(class="chat-input" type="hidden")
+            div(class="message-south")
+                textarea(class="textarea-chat", cols="20", rows="3")
+                button Send
 block javascript
     script(src="assets/js/main.js")
     script(type="text/javascript").
-        $(document).ready(function() {
-
-            $('#live-chat header').on('click', function() {
-
-                $('.chat').slideToggle(300, 'swing');
-                $('.chat-message-counter').fadeToggle(300, 'swing');
-
-            });
-
-            $('.chat-close').on('click', function(e) {
-
-                e.preventDefault();
-                $('#live-chat').fadeOut(300);
-
-            });
-
-            $('.chat-input').on("keypress", function(e) {
-                if (e.keyCode == 13) {
-                    var senderUsername = $('.chat-message-name').val().toString();
-                    var receiverUsername = $('.chat-message-name').val().toString(); 
-                    var payload = {
-                        "senderUsername": "emabarac",    
-                        "receiverUsername": "emabarac",
-                        "timestamp": new Date(),    
-                        "message": $('.chat-input').val().toString()
-                        };
-                    $.ajax({
-                url: "http://localhost:8080/messages",
-                type: "POST",
+        function getThreadMessages(senderUsername, receiverUsername) {
+            $.ajax({
+                url: "http://localhost:8080/messages/" + senderUsername + "/" + receiverUsername,
+                type: "GET",
                 dataType: "text",
-                headers: {'Content-Type': 'application/json'},
-                data: JSON.stringify(payload),
+                headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
                 success: function (data, textStatus, jqXHR) {
-                    sessionStorage.setItem("accessToken",data);
-                    alert('Success: ' + sessionStorage.accessToken);
-                    window.location.href='cursuri.html';
+                    var messages = JSON.parse(data);
+                    for (var i = 0; i < messages.length; i++) {
+                        var date = moment(messages[i].timestamp).format('YYYY-MM-DD HH:mm');
+
+                        messages[i].timestamp = date;
+                        if (messages[i].senderUsername == senderUsername) {
+                            $(".message-thread").append("<div class='message bubble-right'><label class='message-user'>" + messages[i].senderUsername +
+                                    "</label><label class='message-timestamp'>" +
+                                    messages[i].timestamp +
+                                    "</label><p>" + messages[i].message + "</p></div>");
+                        }
+                        else {
+                            $(".message-thread").append("<div class='message bubble-left'><label class='message-user'>" + messages[i].senderUsername +
+                                    "</label><label class='message-timestamp'>" +
+                                    messages[i].timestamp +
+                                    "</label><p>" + messages[i].message + "</p></div>");
+                        }
+                    }
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('Error: ' + errorThrown);
                 }
             });
+        }
+        $(document).ready(function () {
 
+            $.ajax({
+                url: "http://localhost:8080/users",
+                type: "GET",
+                dataType: "text",
+                headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
+                success: function (data, textStatus, jqXHR) {
+                    var users = JSON.parse(data);
+                    for (var i = 0; i < users.length; i++) {
+                        $(".message-user-list").append("<li><a href='#'><span class='user-img'></span><span class='user-title'>"
+                                + users[i].username +
+                                "</span><p class='user-desc'>" + users[i].email +
+                                "</p></a></li>");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + errorThrown);
+                }
+
+            });
+
+            $('.message-user-list').delegate('a', 'click', function () {
+                $('a').removeClass('active');
+                $(this).addClass('active');
+                var receiverUserName = $('.active').children('.user-title').text();
+                $(".message-thread").empty();
+                getThreadMessages(sessionStorage.currentUser, receiverUserName);
+            });
+
+            $('button').click(function (e) {
+                var receiverUsername = $('.active').children('.user-title').text();
+
+                var payload = {
+                    "senderUsername": sessionStorage.currentUser,
+                    "receiverUsername": receiverUsername,
+                    "message": $('.textarea-chat').val()
+                };
                 $.ajax({
-                url: "http://localhost:8080/messages/" + "emabarac/" + "emabarac",
-                type: "POST",
-                dataType: "text",
-                headers: {'Content-Type': 'application/json', 'token':},
-                data: JSON.stringify(payload),
-                success: function (data, textStatus, jqXHR) {
-                    alert(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Error: ' + errorThrown);
-                }
+                    url: "http://localhost:8080/messages",
+                    type: "POST",
+                    dataType: "text",
+                    headers: {'Content-Type': 'application/json', 'token': sessionStorage.accessToken},
+                    data: JSON.stringify(payload),
+                    success: function (data, textStatus, jqXHR) {
+                        $(".textarea-chat").val('');
+                        $(".message-thread").empty();
+                        getThreadMessages(sessionStorage.currentUser, receiverUsername);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Error: ' + errorThrown);
+                    }
+                });
             });
+        });
 
-            }    
-            });});

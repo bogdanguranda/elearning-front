@@ -1,0 +1,31 @@
+extends ../components/common/page.jade
+
+block content
+    include ../components/signup/signup.jade
+block javascript
+    script(type="text/javascript").
+        $(document).ready(function () {
+            $("button").on("click", function () {
+                var payload = {
+                    "username": $('#username').val().toString(),
+                    "firstName": $('#firstname').val().toString(),
+                    "lastName": $('#lastname').val().toString(),
+                    "email": $('#email').val().toString(),
+                    "password": $('#password').val().toString()
+                };
+                $.ajax({
+                    url: "http://localhost:8080/users",
+                    type: "POST",
+                    dataType: "text",
+                    headers: {'Content-Type': 'application/json'},
+                    data: JSON.stringify(payload),
+                    success: function (data, textStatus, jqXHR) {
+                        alert('Success: ' + data);
+                        window.location.href = 'login.html';
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Error: ' + errorThrown);
+                    }
+                });
+            });
+        });

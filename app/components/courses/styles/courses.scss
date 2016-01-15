@@ -1,0 +1,41 @@
+.row-header {
+  background-color: #36ffcc;
+  color: white;
+  margin-top: 10px;
+  font-size: 90px;
+  line-height: 105px;
+  letter-spacing: -1px;
+  color: black;
+}
+
+.row-content {
+  background-color: white;
+  border-top: 1px solid black;
+}
+
+.get-cursuri {
+  margin-right: 10px;
+}
+
+.curs-nou {
+  margin-right: 15px;
+}
+
+.textarea {
+  resize: none;
+}
+
+.modal-body {
+  height: 270px;
+}
+
+#btns-cursuri {
+  padding: 0;
+}
+
+.btn-enroll, .btn-remove-course {
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #00cc00;
+}
